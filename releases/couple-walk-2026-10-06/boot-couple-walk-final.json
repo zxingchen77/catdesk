@@ -1,0 +1,11 @@
+{
+  "duration_seconds": 120,
+  "identity_confirmed": true,
+  "real_time_acks": 58,
+  "waiting_observed": 1,
+  "physical_touch_accepted": 1,
+  "home_scene_stopped": 1,
+  "alive_logs": 7,
+  "failure_markers": [],
+  "physical_flow_pass": true
+}

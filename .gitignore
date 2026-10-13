@@ -1,0 +1,12 @@
+/firmware/build/
+/firmware/build-*/
+/firmware/sdkconfig
+/firmware/sdkconfig.old
+/firmware/managed_components/
+/logs/
+/exports/
+/releases/**/*.log
+/releases/**/sdkconfig
+/releases/**/sdkconfig.snapshot
+.DS_Store
+__pycache__/

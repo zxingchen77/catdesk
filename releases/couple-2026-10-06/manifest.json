@@ -1,0 +1,137 @@
+{
+  "date": "2026-10-06",
+  "target": "ESP32-S3-Touch-LCD-7",
+  "esp_idf": "5.5.5",
+  "firmware": "catdesk-couple.bin",
+  "firmware_bytes": 782336,
+  "sha256": "12bafb5f8edbb87d17bafcc0badd3a006153fe9e05ceab8cb91ea6448238c5ad",
+  "application_partition_bytes": 1048576,
+  "free_application_bytes": 266240,
+  "bytes_added_vs_welcome": 3120,
+  "flash": {
+    "method": "idf.py app-flash",
+    "offset": "0x10000",
+    "checksum_verified": true,
+    "bootloader_or_partition_flashed": false
+  },
+  "couple": {
+    "logical_pixels": [
+      400,
+      240
+    ],
+    "physical_pixels": [
+      800,
+      480
+    ],
+    "scale": "2x nearest-neighbor",
+    "person_sprite_pixels": [
+      16,
+      24
+    ],
+    "people": 2,
+    "poses_per_person": [
+      "front",
+      "side",
+      "sit"
+    ],
+    "colors_per_person": 9,
+    "existing_theme_only": true,
+    "packed_sprite_bytes": 1152,
+    "palette_bytes": 40,
+    "state_bytes": 32,
+    "new_framebuffers": 0,
+    "heap_allocation": false,
+    "person_AI": false,
+    "photo": {
+      "logical_pixels": [
+        32,
+        28
+      ],
+      "position": [
+        269,
+        33
+      ],
+      "permanent": true,
+      "tap_ms": 1000,
+      "shake_px": 1,
+      "new_page_or_UI": false
+    },
+    "sofa": {
+      "min_first_wait_ms": 1200000,
+      "min_event_spacing_ms": 1200000,
+      "opportunity_interval_ms": [
+        120000,
+        240000
+      ],
+      "chance_per_eligible_opportunity": "1/6",
+      "duration_ms": [
+        8000,
+        15000
+      ],
+      "quiet_after_touch_ms": 30000,
+      "suppressed_by": [
+        "welcome",
+        "popup",
+        "physical contact",
+        "recent touch",
+        "focus running",
+        "notice",
+        "anniversary/finale",
+        "cat sofa visit"
+      ],
+      "24_hour_simulation_appearances": 38
+    },
+    "anniversary": {
+      "original_model_unchanged": true,
+      "original_hearts_ms": 5000,
+      "appended_still_ms": 2500,
+      "date": "2024.10.07",
+      "cats": 2,
+      "heart": 1,
+      "alpha_fade": false
+    }
+  },
+  "source_sha256": {
+    "firmware/components/catdesk_ui/catdesk_ui.c": "c510b6f27e5a68e1bac41d461271d7fc1429c21f18f404a2ac7c7cd95deda233",
+    "firmware/components/catdesk_ui/catdesk_render.c": "687bd636419d2163e08300b8713a7c4a7e426399bf92c9aef02a0faadde4557a",
+    "firmware/components/catdesk_ui/catdesk_couple.c": "03bf7c91a2c424cfe7df631e90bf5db2490e07f5ce8683ca618a462749dfed59",
+    "firmware/components/catdesk_ui/catdesk_people.inc": "5a18b167a2e5361211de94aed42707bd261a6ceb1c3499a84d266d8de340b12f",
+    "firmware/components/catdesk_ui/catdesk_room.c": "1142bc0fd8904d287e2b85c757b3ce2532b9507ee534f6adb354375f46f0eac1",
+    "firmware/components/catdesk_ui/catdesk_welcome.c": "037a1cf41e03db5e31afd07eca9dcad15b139071aa1598cf95f220ed94b8beb1"
+  },
+  "protected_files": {
+    "sha256_check": "all 15 baseline entries PASS",
+    "scope": "LCD/HAL, model, cat art, USB link, palette/layout, config, original partition/bootloader and Mac Helper"
+  },
+  "verification": {
+    "host": "PASS: C11 + ASan/UBSan; 7495 original UI frames, 15592 physical-pixel presenter frames, 17527 invalidations, persistence, callbacks, room and Welcome regressions, new gates/durations/24h rarity/outline tests",
+    "software_visual": "PASS: actual C renderer, 2x grid, 9 colors/character, same palette; every decoded GIF pixel verified",
+    "static_stage_hardware": {
+      "duration_seconds": 90,
+      "identity_confirmed": true,
+      "real_time_acks": 43,
+      "waiting_observed": 1,
+      "physical_touch_accepted": 1,
+      "home_scene_stopped": 1,
+      "alive_logs": 5,
+      "failure_markers": [],
+      "physical_flow_pass": true
+    },
+    "final_hardware": {
+      "duration_seconds": 180,
+      "identity_confirmed": true,
+      "real_time_acks": 87,
+      "waiting_observed": 1,
+      "physical_touch_accepted": 0,
+      "home_scene_stopped": 0,
+      "alive_logs": 11,
+      "failure_markers": [],
+      "physical_flow_pass": false
+    },
+    "physical_visual_acceptance": "pending user response",
+    "natural_sofa_event_on_hardware": "not observed in short run; 20min minimum retained",
+    "final_hardware_result": "Boot/identity/87 real TIME ACKs and 11 stable alive samples PASS. Still waiting for physical Welcome touch; final home/photo/finale visual acceptance not observed."
+  },
+  "previews": "assets/couple-2026-10-06",
+  "inherited_working_tree": "Preserves prior uncommitted room-life and Welcome implementation; no refactor or changes to protected baseline files."
+}

@@ -1,0 +1,531 @@
+{
+  "description": "Actual firmware welcome and home renderer software previews, not LCD photographs.",
+  "logical_size": [
+    400,
+    240
+  ],
+  "output_size": [
+    800,
+    480
+  ],
+  "scale": "nearest-neighbor 2x",
+  "sample_ms": 100,
+  "touch_ms": 5600,
+  "brightness_percent": 85,
+  "source_sha256": {
+    "tools/render_welcome_preview.c": "250ce19a948cd4357f2cb5e5d0dec4c8899f65c4d9926240f00a7dc5a8db8eda",
+    "firmware/components/catdesk_ui/catdesk_welcome.c": "037a1cf41e03db5e31afd07eca9dcad15b139071aa1598cf95f220ed94b8beb1",
+    "firmware/components/catdesk_ui/catdesk_model.c": "779ee029bd304412316a94cdd47b2be44e2d490898e4d56b28e45d526d58d888",
+    "firmware/components/catdesk_ui/catdesk_render.c": "687bd636419d2163e08300b8713a7c4a7e426399bf92c9aef02a0faadde4557a",
+    "firmware/components/catdesk_ui/catdesk_couple.c": "5fb19e09c17309e17e51d56a91ad887cbe3ffe9e81abfbb34d62e6689d8cdc91",
+    "firmware/components/catdesk_ui/catdesk_room.c": "1142bc0fd8904d287e2b85c757b3ce2532b9507ee534f6adb354375f46f0eac1",
+    "firmware/components/catdesk_ui/catdesk_font.c": "316f8e0b54735d08e27f50b07376b84e78fa5dcb514e55cd99bb5c8763d29ad8",
+    "firmware/components/catdesk_ui/catdesk_cats.c": "220b94787627a722f6228c0d4c28dddfd1fb0f586a38469484cdd0ce493eb275",
+    "firmware/components/catdesk_ui/pixel_ui.c": "41afe46291a3b37c5ad71fdfb5e50cd8ae20e54d93a016f9821116af83363a58"
+  },
+  "snapshots": {
+    "welcome_night_preview.png": {
+      "date": "2026-10-06",
+      "elapsed_ms": 0,
+      "scene_ms": 0,
+      "exit_ms": 0,
+      "phase": "intro",
+      "active": true,
+      "anniversary": false,
+      "touch_ms": 120001,
+      "touch_accepted": false,
+      "press_latched": false,
+      "orange": {
+        "x": 145,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": false
+      },
+      "black": {
+        "x": 215,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": -1,
+        "visible": false
+      }
+    },
+    "welcome_waiting_preview.png": {
+      "date": "2026-10-06",
+      "elapsed_ms": 4000,
+      "scene_ms": 4000,
+      "exit_ms": 0,
+      "phase": "waiting",
+      "active": true,
+      "anniversary": false,
+      "touch_ms": 120001,
+      "touch_accepted": false,
+      "press_latched": false,
+      "orange": {
+        "x": 145,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": true
+      },
+      "black": {
+        "x": 215,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": -1,
+        "visible": true
+      }
+    },
+    "welcome_waiting_dim_preview.png": {
+      "date": "2026-10-06",
+      "elapsed_ms": 5000,
+      "scene_ms": 5000,
+      "exit_ms": 0,
+      "phase": "waiting",
+      "active": true,
+      "anniversary": false,
+      "touch_ms": 120001,
+      "touch_accepted": false,
+      "press_latched": false,
+      "orange": {
+        "x": 145,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": true
+      },
+      "black": {
+        "x": 215,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": -1,
+        "visible": true
+      }
+    },
+    "welcome_anniversary_preview.png": {
+      "date": "2026-10-07",
+      "elapsed_ms": 4000,
+      "scene_ms": 4000,
+      "exit_ms": 0,
+      "phase": "waiting",
+      "active": true,
+      "anniversary": true,
+      "touch_ms": 120001,
+      "touch_accepted": false,
+      "press_latched": false,
+      "orange": {
+        "x": 145,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": true
+      },
+      "black": {
+        "x": 215,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": -1,
+        "visible": true
+      }
+    },
+    "welcome_doorway_preview.png": {
+      "date": "2026-10-06",
+      "elapsed_ms": 6400,
+      "scene_ms": 5600,
+      "exit_ms": 800,
+      "phase": "entering",
+      "active": true,
+      "anniversary": false,
+      "touch_ms": 5600,
+      "touch_accepted": true,
+      "press_latched": true,
+      "orange": {
+        "x": 166,
+        "y": 129,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": false
+      },
+      "black": {
+        "x": 194,
+        "y": 129,
+        "state": 0,
+        "frame": 0,
+        "direction": -1,
+        "visible": false
+      }
+    },
+    "welcome_wipe_preview.png": {
+      "date": "2026-10-06",
+      "elapsed_ms": 6900,
+      "scene_ms": 5600,
+      "exit_ms": 1300,
+      "phase": "wiping",
+      "active": true,
+      "anniversary": false,
+      "touch_ms": 5600,
+      "touch_accepted": true,
+      "press_latched": true,
+      "orange": {
+        "x": 166,
+        "y": 129,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": false
+      },
+      "black": {
+        "x": 194,
+        "y": 129,
+        "state": 0,
+        "frame": 0,
+        "direction": -1,
+        "visible": false
+      }
+    },
+    "welcome_home_preview.png": {
+      "date": "2026-10-06",
+      "elapsed_ms": 7400,
+      "scene_ms": 5600,
+      "exit_ms": 1700,
+      "phase": "done",
+      "active": false,
+      "anniversary": false,
+      "touch_ms": 5600,
+      "touch_accepted": true,
+      "press_latched": true,
+      "orange": {
+        "x": 0,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": false
+      },
+      "black": {
+        "x": 0,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": false
+      }
+    }
+  },
+  "animations": {},
+  "existing_home_rgb_colors": {
+    "normal": [
+      [
+        24,
+        28,
+        32
+      ],
+      [
+        32,
+        32,
+        32
+      ],
+      [
+        41,
+        40,
+        49
+      ],
+      [
+        49,
+        40,
+        32
+      ],
+      [
+        57,
+        72,
+        57
+      ],
+      [
+        65,
+        44,
+        32
+      ],
+      [
+        74,
+        80,
+        82
+      ],
+      [
+        74,
+        89,
+        106
+      ],
+      [
+        90,
+        68,
+        49
+      ],
+      [
+        98,
+        97,
+        115
+      ],
+      [
+        98,
+        113,
+        74
+      ],
+      [
+        106,
+        72,
+        49
+      ],
+      [
+        106,
+        121,
+        131
+      ],
+      [
+        139,
+        105,
+        74
+      ],
+      [
+        139,
+        145,
+        106
+      ],
+      [
+        139,
+        153,
+        156
+      ],
+      [
+        148,
+        89,
+        74
+      ],
+      [
+        148,
+        133,
+        98
+      ],
+      [
+        156,
+        113,
+        65
+      ],
+      [
+        156,
+        121,
+        106
+      ],
+      [
+        156,
+        145,
+        106
+      ],
+      [
+        172,
+        141,
+        90
+      ],
+      [
+        172,
+        153,
+        98
+      ],
+      [
+        180,
+        141,
+        123
+      ],
+      [
+        180,
+        141,
+        148
+      ],
+      [
+        180,
+        165,
+        98
+      ],
+      [
+        180,
+        165,
+        131
+      ],
+      [
+        189,
+        157,
+        106
+      ],
+      [
+        197,
+        182,
+        139
+      ],
+      [
+        213,
+        190,
+        148
+      ]
+    ],
+    "anniversary": [
+      [
+        24,
+        28,
+        32
+      ],
+      [
+        32,
+        32,
+        32
+      ],
+      [
+        41,
+        40,
+        49
+      ],
+      [
+        49,
+        40,
+        32
+      ],
+      [
+        57,
+        72,
+        57
+      ],
+      [
+        65,
+        44,
+        32
+      ],
+      [
+        74,
+        80,
+        82
+      ],
+      [
+        74,
+        89,
+        106
+      ],
+      [
+        90,
+        68,
+        49
+      ],
+      [
+        98,
+        97,
+        115
+      ],
+      [
+        98,
+        113,
+        74
+      ],
+      [
+        106,
+        72,
+        49
+      ],
+      [
+        106,
+        121,
+        131
+      ],
+      [
+        139,
+        105,
+        74
+      ],
+      [
+        139,
+        145,
+        106
+      ],
+      [
+        139,
+        153,
+        156
+      ],
+      [
+        148,
+        89,
+        74
+      ],
+      [
+        148,
+        133,
+        98
+      ],
+      [
+        156,
+        113,
+        65
+      ],
+      [
+        156,
+        121,
+        106
+      ],
+      [
+        156,
+        145,
+        106
+      ],
+      [
+        172,
+        141,
+        90
+      ],
+      [
+        172,
+        153,
+        98
+      ],
+      [
+        180,
+        141,
+        123
+      ],
+      [
+        180,
+        141,
+        148
+      ],
+      [
+        180,
+        165,
+        98
+      ],
+      [
+        180,
+        165,
+        131
+      ],
+      [
+        189,
+        157,
+        106
+      ],
+      [
+        197,
+        182,
+        139
+      ],
+      [
+        213,
+        190,
+        148
+      ]
+    ]
+  }
+}

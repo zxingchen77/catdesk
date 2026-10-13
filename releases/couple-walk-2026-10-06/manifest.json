@@ -1,0 +1,161 @@
+{
+  "date": "2026-10-06",
+  "target": "ESP32-S3-Touch-LCD-7",
+  "esp_idf": "5.5.5",
+  "firmware": "catdesk-couple-walk.bin",
+  "firmware_bytes": 784176,
+  "sha256": "fba9ef73dbb9a6f9bc953d1594c454a55b4a4c134304b6a36ba5360af93ee327",
+  "application_partition_bytes": 1048576,
+  "free_application_bytes": 264400,
+  "bytes_added_vs_previous_couple": 1840,
+  "flash": {
+    "method": "idf.py app-flash",
+    "offset": "0x10000",
+    "checksum_verified": true,
+    "bootloader_or_partition_flashed": false
+  },
+  "request": "Remove only the added couple photo; show the pair wandering in the room; retain sofa and anniversary finale.",
+  "couple": {
+    "people": 2,
+    "logical_pixels": [
+      400,
+      240
+    ],
+    "physical_pixels": [
+      800,
+      480
+    ],
+    "scale": "nearest-neighbor 2x",
+    "sprite_size": [
+      16,
+      24
+    ],
+    "poses": [
+      "front",
+      "side",
+      "sit",
+      "walk_a",
+      "walk_b"
+    ],
+    "colors_per_person": 9,
+    "packed_sprite_bytes": 1920,
+    "palette_bytes": 40,
+    "state_bytes": 76,
+    "new_framebuffers": 0,
+    "heap_allocation": false,
+    "complex_AI": false,
+    "couple_photo": false,
+    "walking": {
+      "visible_on_home_entry": true,
+      "initial_positions": [
+        [
+          172,
+          139
+        ],
+        [
+          208,
+          143
+        ]
+      ],
+      "bounds": [
+        150,
+        128,
+        240,
+        146
+      ],
+      "pixel_step_ms": 110,
+      "idle_ms": [
+        1800,
+        6000
+      ],
+      "short_touch_pause_ms": 1200,
+      "max_catchup_pixels": 8,
+      "minimum_horizontal_separation_px": 16,
+      "PRNG_separate_from_sofa_and_model": true
+    },
+    "sofa": {
+      "retained": true,
+      "minimum_first_wait_and_spacing_ms": 1200000,
+      "opportunity_interval_ms": [
+        120000,
+        240000
+      ],
+      "chance": "1/6",
+      "duration_ms": [
+        8000,
+        15000
+      ],
+      "same_two_people": true
+    },
+    "anniversary": {
+      "retained": true,
+      "appended_still_ms": 2500,
+      "date": "2024.10.07"
+    }
+  },
+  "verification": {
+    "host": "PASS: original model/link/UI/persistence/callbacks/room/Welcome and new walking/sofa/finale, C11 ASan UBSan",
+    "presenter": {
+      "frames": 20218,
+      "invalidations": 23683,
+      "every_physical_pixel_and_dirty_area": "PASS"
+    },
+    "software_visual": "PASS: ten 9-color sprites, room entry and 35s wandering, furniture-safe corridor; every decoded GIF pixel exact 2x",
+    "protected_sha256_entries": "15/15 PASS",
+    "hardware_observer": {
+      "duration_seconds": 120,
+      "identity_confirmed": true,
+      "real_time_acks": 58,
+      "waiting_observed": 1,
+      "physical_touch_accepted": 1,
+      "home_scene_stopped": 1,
+      "alive_logs": 7,
+      "failure_markers": [],
+      "physical_flow_pass": true
+    },
+    "hardware_home_people_views": [
+      [
+        184,
+        139,
+        0,
+        204,
+        144,
+        3
+      ],
+      [
+        158,
+        143,
+        0,
+        188,
+        141,
+        0
+      ],
+      [
+        150,
+        142,
+        0,
+        178,
+        142,
+        0
+      ]
+    ],
+    "hardware_two_people_position_changes_verified": true,
+    "hardware_render_us": [
+      68549,
+      68561,
+      68731
+    ],
+    "hardware_sram_bytes": 210955,
+    "hardware_psram_bytes": 4925096,
+    "physical_visual_acceptance": "User entered via real touch; render-visible flag and both position changes observed in UART. No explicit visual acceptance statement received.",
+    "natural_sofa_event_in_short_hardware_run": "not observed; original frequency retained"
+  },
+  "source_sha256": {
+    "firmware/components/catdesk_ui/catdesk_couple.c": "6d5fdc687d1add9c3b03be555d4fe33903beede1269652995eeab1c0566c74f1",
+    "firmware/components/catdesk_ui/catdesk_people.inc": "9f2d18e4b8d671dddc5aa4b7835fd36ee5700a59865dd9e0189bed1b40b8ee3c",
+    "firmware/components/catdesk_ui/catdesk_render.c": "cf72cac9fec5eaa1af1297b3328f30407b15d5668054f418bd7f8f3c23f78c8c",
+    "firmware/components/catdesk_ui/catdesk_ui.c": "cb88ef2c5adb87c391d5951f9ea6123367756e7973f34de105fe6986d7d5b378",
+    "firmware/components/catdesk_ui/include/catdesk_couple.h": "46b95e815a4c664496fdbfe20fde12b8f73d9c221685ce0cc524434f4f42c412"
+  },
+  "previews": "assets/couple-walk-2026-10-06"
+}

@@ -1,0 +1,3 @@
+[submodule "vendor/waveshare_boards"]
+	path = vendor/waveshare_boards
+	url = https://github.com/waveshareteam/waveshare_boards.git

@@ -1,0 +1,511 @@
+{
+  "purpose": "Verify constant RGB565 night-palette switch preserves previously generated candidate previews.",
+  "comparison": "Decoded RGB pixel bytes; file metadata and compression are ignored.",
+  "result": "PASS",
+  "static_png_count": 49,
+  "production_gif_sample_count": 9,
+  "source_sha256": {
+    "firmware/components/catdesk_ui/catdesk_render.c": "df1c85cc52e600f2e89b0bd03e69254b45cbd3263edc12c5e64145224a8ae7b3",
+    "firmware/components/catdesk_ui/catdesk_room.c": "1142bc0fd8904d287e2b85c757b3ce2532b9507ee534f6adb354375f46f0eac1",
+    "tools/render_preview.c": "f83c479c914fb7b15d2948399655c2d90818c5979345ed033b5e2248a49d1e1b"
+  },
+  "static_pngs": [
+    {
+      "filename": "anniversary_730_days_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "f8d7816e1030e0211603d81d32baf9bd87e417688e08c12eb0347d05c2853cec"
+    },
+    {
+      "filename": "anniversary_button_pressed_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "950af0425b484fde6935d8ba1b0a599747db04c6e37db80ce8ab18374fb89c74"
+    },
+    {
+      "filename": "anniversary_popup_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "f868688d8307c116748e465777314e8cd7ff816f82273b0aa99ff151e3277476"
+    },
+    {
+      "filename": "anniversary_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "0cc3cbd61a3177aa32227fb9634e195d46c3fd9d0b70b429635af09281ff84f2"
+    },
+    {
+      "filename": "anniversary_replay_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "4806865555b16e848aa2e48d26c284dea7e302e53baf7a9b01090f197e27b887"
+    },
+    {
+      "filename": "cats_rapid_tap_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "6b442482e94df94dcf3a174ede45a38a25587044d7617eb85f4b9017795d9160"
+    },
+    {
+      "filename": "cats_sleep_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "fa0caabc150f763c87314e11bce782e40a36233d87ff235c5b1f6d921ab5b48f"
+    },
+    {
+      "filename": "cats_tap_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "8c899a796c0c1cfa4a8df735ec33398917498f1447a5a59b4ad4c649d7cc0449"
+    },
+    {
+      "filename": "close_button_pressed_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "d78ebe84ccf3bf986600fd0f834a7ba8fac2186629764440eb3684c678e40456"
+    },
+    {
+      "filename": "focus_button_pressed_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "ff8f0b5621f0e8604a049faf24500e39fa02dcbc9981a78aadcb980e7a590eca"
+    },
+    {
+      "filename": "focus_completed_popup_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "81fe4d85c6804005c21cd889fd85b9270659a5c39f2ea279359510fe20f68e09"
+    },
+    {
+      "filename": "focus_completed_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "b5f88b114f9c3de3ca2baca21fdfbc46cb44fb2ce5a66703de270d4ae1832f4f"
+    },
+    {
+      "filename": "focus_home_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "fd0897ce36bc21f11631f61253491701edae218e98855f8b613f7421afeb8b87"
+    },
+    {
+      "filename": "focus_paused_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "60cc00bcef561d672165e8cc312159d93b5b148575b2d617e4e20655fbea60f0"
+    },
+    {
+      "filename": "focus_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "834fb995090ffc5887e42a7f96ff5d890708913464462baf799c5b007076551c"
+    },
+    {
+      "filename": "focus_running_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "6fd4ea29722fc6623dbbaf0c58fc16d9d0cee91a8517d116e38f07221c481341"
+    },
+    {
+      "filename": "home_anniversary_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "ef0cdc86c5d868834c79105c31141c6bd82a2bc2309c0963fae68fe780dff414"
+    },
+    {
+      "filename": "home_connected_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "1ffa7f0329ef2d751f57a575db6d95f5295501ee88b4859337d0385dca19dba1"
+    },
+    {
+      "filename": "home_normal_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "54f53784c8ccc76ed7188f49c7ffe58fe95cfc590d7b5e492cde2401979236f7"
+    },
+    {
+      "filename": "home_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "edf24c4a2e79d8c1ab9086d95fd5ff19d0c01ece0ca72144ae465b996b96071f"
+    },
+    {
+      "filename": "mac_battery_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "b02f1d5f72c3d289c7202e7902ca6f75e9a9a58a0e738ab0d1cb678ca0d469bc"
+    },
+    {
+      "filename": "mac_connected_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "dbb7b1119e35bbbf6263aa540f1b386cd3cf80c629b0db0ba27bbaf869149bc0"
+    },
+    {
+      "filename": "mac_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "fb341eaec6e56e27eb54a76a35fc36ac76bf75029765ddb5efd0824676201dee"
+    },
+    {
+      "filename": "pixel_components_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "0335cc949e7922785a5ca3a9fb67fd9e5a1fa96af588932dbca08a4a08b6a935"
+    },
+    {
+      "filename": "popups_preview.png",
+      "size": [
+        1600,
+        1440
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "a6b7d80902f73df81622fd046cb127f81396f3b02246f7746bffd5e1895466c4"
+    },
+    {
+      "filename": "room_box_inspection.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "1afdaa4e72f6d37c1e7fa556535694ae0922ca2d7e0cf585029afc22d9317bf3"
+    },
+    {
+      "filename": "room_chase_inspection.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "603d86fe306d2722be53c097097d48a7699be47ec95c2dfe730728efb24ab5c7"
+    },
+    {
+      "filename": "room_cuddle_inspection.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "b4ff42e179e9334b6cb7743f3fe1e0e44cca66556e745b29249530971ba578e6"
+    },
+    {
+      "filename": "room_day_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "4d40c69144c29bc545488718f040dcf38a2a926f19559318dcf756b14300b3b9"
+    },
+    {
+      "filename": "room_dusk_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "73eabfa54bce6d260f368d18b225f32d6585d04cd2e13071086df480ed91a17c"
+    },
+    {
+      "filename": "room_life_inspections.png",
+      "size": [
+        1600,
+        1920
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "d9e446a10ce15a98f7d5adb7f6156787adfd00d283c59639a12b5541edc50828"
+    },
+    {
+      "filename": "room_mac_inspection.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "cea17a3713ce2e911501944e2722acabe21db4847a885fe926a067b91c7d19f3"
+    },
+    {
+      "filename": "room_night_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "7666daf3a17cbddfb3fc63f7b213f62ed9ae1701d47d462b62e9142ac6397ac0"
+    },
+    {
+      "filename": "room_periods_preview.png",
+      "size": [
+        2400,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "6c2d79d473f9c278cb4f73da68e42ae8c3107a5c9e10a26b81e97294faee104b"
+    },
+    {
+      "filename": "room_sniff_inspection.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "e59fa81786b575b85f69491cc637bd45b825474494f31098a1f3daf7944bb8a8"
+    },
+    {
+      "filename": "room_sofa_inspection.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "010764c7e5d37bb57fdf0af985c999aee10cff75bad64bef42fc3729088e9e5c"
+    },
+    {
+      "filename": "room_window_inspection.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "cbff7834caa4a5977ceca14761f2a7ec6f7cc61d1ff7700f640fad87aa6fa9cf"
+    },
+    {
+      "filename": "room_yarn_inspection.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "b26329f56b58f05d038290f95ea57b794ebbbb0ff1af6164dfbf22c2524f57c4"
+    },
+    {
+      "filename": "settings_max_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "d21a211a6a8df0dbcc53f63b88dde7a6ec979e15abf5fe1e7bfd721974dee240"
+    },
+    {
+      "filename": "settings_min_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "230431f839ad5e377f9449f194f6f2fcbf608e41c7c59121647af48471de4580"
+    },
+    {
+      "filename": "settings_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "6d532df82a84109f3f7e823cce7f51bc0995d6802a0691dbaa20581a816757af"
+    },
+    {
+      "filename": "states_preview.png",
+      "size": [
+        1600,
+        1440
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "c1cf8657bb2e2ebcf1db9e4b4c7754b9d1edc8087f3084d6df8bc3e86e4ecee1"
+    },
+    {
+      "filename": "todo_button_pressed_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "077f429e9670c98edb24b9fdd8e60ce272bbc71ac2e682ec24dc28080cc8cfe1"
+    },
+    {
+      "filename": "todo_complete_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "1ac8eb6247b95c0f4798bff5a583c57ee3294bc5770823d4b34729c711a99257"
+    },
+    {
+      "filename": "todo_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "7babf66fc71aaf54e0b48ca362bb2f271dc55afa4f73e89b6f679863fc3da8d4"
+    },
+    {
+      "filename": "todo_progress_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "c9cb497687bd2632018f1a87ef49d3522d06e6167bc474f37aad38eead84eb2f"
+    },
+    {
+      "filename": "weather_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "d6756b9b028df3fccd01f620d8aa4a5a47d73bd38081976c3d03b3f98bb4b8b7"
+    },
+    {
+      "filename": "world_connected_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "9a718d5b1bac097c76926b3cf4e0bb049e7c2ce2bdd7711d93207718ca53de15"
+    },
+    {
+      "filename": "world_preview.png",
+      "size": [
+        800,
+        480
+      ],
+      "pixel_identical": true,
+      "rgb_sha256": "87f791fa038903d12aa8aa90e082fb2b6cafbb7b1db505a1ea9250c947a5ea11"
+    }
+  ],
+  "production_gif_samples": [
+    {
+      "requested_elapsed_ms": 0,
+      "sample_elapsed_ms": 0,
+      "pixel_identical": true,
+      "rgb_sha256": "bce8cfb8ad1bb8c144d0b1ca7f03a195f1d74f0e8b3ad786e33f73ea5c4c7b87"
+    },
+    {
+      "requested_elapsed_ms": 45000,
+      "sample_elapsed_ms": 44800,
+      "pixel_identical": true,
+      "rgb_sha256": "3cbad2527b37f5a3c3c86e777b015d354f3326efac389b992edf0dd72f6048a6"
+    },
+    {
+      "requested_elapsed_ms": 75000,
+      "sample_elapsed_ms": 74800,
+      "pixel_identical": true,
+      "rgb_sha256": "d4193d0975df6ac110dfaa52562465b7a5ec95f5174a473f2b1b718bd6f991a0"
+    },
+    {
+      "requested_elapsed_ms": 105000,
+      "sample_elapsed_ms": 104800,
+      "pixel_identical": true,
+      "rgb_sha256": "82d545b41b0220423a037ecf8e940954599128a861e3074b5654d20992d960de"
+    },
+    {
+      "requested_elapsed_ms": 135000,
+      "sample_elapsed_ms": 134800,
+      "pixel_identical": true,
+      "rgb_sha256": "898a38b8d4bfcff8e225720527b01d34e0d27b815a27470761db2435394e9b1f"
+    },
+    {
+      "requested_elapsed_ms": 165000,
+      "sample_elapsed_ms": 164800,
+      "pixel_identical": true,
+      "rgb_sha256": "2da68acde71c221e976edb076f956f5c3ef28ea05d3fe1ec9ad5003b916bb255"
+    },
+    {
+      "requested_elapsed_ms": 195000,
+      "sample_elapsed_ms": 194800,
+      "pixel_identical": true,
+      "rgb_sha256": "dcc4a1bc687df2aab464f0fcaf92461dae266b03a61a8f09caf499eb85412b1e"
+    },
+    {
+      "requested_elapsed_ms": 230000,
+      "sample_elapsed_ms": 230000,
+      "pixel_identical": true,
+      "rgb_sha256": "603d86fe306d2722be53c097097d48a7699be47ec95c2dfe730728efb24ab5c7"
+    },
+    {
+      "requested_elapsed_ms": 270000,
+      "sample_elapsed_ms": 270000,
+      "pixel_identical": true,
+      "rgb_sha256": "b4ff42e179e9334b6cb7743f3fe1e0e44cca66556e745b29249530971ba578e6"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "release_baseline": {
+    "day": 6.518,
+    "dusk": 5.729,
+    "night": 5.635,
+    "anniversary": 251.213
+  },
+  "candidate_palette_loop": {
+    "day": 17.613,
+    "dusk": 9.739,
+    "night": 247.812,
+    "anniversary": 245.062
+  },
+  "candidate_constant_switch": {
+    "day": 16.065,
+    "dusk": 9.532,
+    "night": 128.756,
+    "anniversary": 122.579
+  },
+  "mapping_equivalence": {
+    "rgb565_inputs": 65536,
+    "buffer_pixels": 96000,
+    "result": "PASS",
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ]
+  },
+  "context": {
+    "runtime": "host macOS, clang -Og, CPU clock",
+    "frames_per_scenario": 1200,
+    "unit": "microseconds_per_frame",
+    "device_timing": false
+  },
+  "night_speedup": 1.9246637049923887
+}

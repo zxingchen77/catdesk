@@ -1,0 +1,1638 @@
+diff --git a/CATDESK_PROGRESS.md b/CATDESK_PROGRESS.md
+index 9e5fa95..9172d45 100644
+--- a/CATDESK_PROGRESS.md
++++ b/CATDESK_PROGRESS.md
+@@ -1,5 +1,24 @@
+ # CatDesk：原创 16-bit 生活 RPG 视觉重制
+ 
++## 产品化候选版（2026-10-06，尚未烧录）
++
++本轮用户选择“实现昼夜和猫生活行为，生成候选版”。交付优先级固定为稳定 > 周年效果 > 猫的生命感 > 视觉 > 功能数量。功能边界保持天气、纪念日、待办、25 分钟专注、Mac 状态、亮度和两只猫。
++
++- 保留当前房间布局、31 色和 44 帧猫素材；不修改 LCD/HAL、RGB 参数、USB 协议、Mac Helper、核心业务模型、保存格式、字体、布局头文件或原礼物固件。16 项保护文件 SHA-256 与本轮开始一致。
++- 按上海时间划分白天 06:00–16:59、黄昏 17:00–19:59、夜晚 20:00–05:59。收到有效 Helper 校时前保持黄昏，避免用构建日期误判昼夜。切换天空、云/月亮/星星、串灯与阅读灯；夜间流星和亮灯时的飞蛾复用原环境循环。
++- 新增 `catdesk_room.c` 纯显示层投影，不分配内存或修改模型。五分钟循环含沙发睡觉、钻纸箱、玩毛线、坐窗台、挡 Mac、闻一闻、追逐、一起睡；各段用五秒进出移动，猫的原触摸反应在当前显示位置播放。普通模型靠近继续运行，家具活动保留显示位置；周年剧情始终使用原猫位置与状态。
++- 猫、窗内动画和飞蛾分开失效；猫的失效区域覆盖新旧位置、跳跃、爱心、气泡和阴影。整屏颜色更新只发生在昼夜、周年和亮度切换时。原 DOUBLE_DIRECT、CPU0、NVS 写后同步保留。
++- 家具上的猫按真实 sprite 像素判定点击，使用 80 字节临时列缓冲，透明空隙仍可打开电脑等入口；纸箱前沿使用 360 字节临时副本遮挡身体，不增加 framebuffer。追逐两猫相差 8 px 深度，避免进场时完全重叠。
++- 夜间色替换改用常量 RGB565 分支，取消每像素搜索十二个运行时颜色项；映射与原周年暗色完全一致，不增加颜色查找缓冲。持续夜景的实机绘制用时仍留待烧录验收。
++- 候选构建使用 ESP-IDF v5.5.5、`firmware/build-room-candidate/`，2091 步成功；仅有原上游 Board Manager 未使用变量 warning。应用 773,312 字节，1 MB 分区余量 275,264 字节（26.3%）。没有运行串口工具、停止 Helper、复位或烧录。
++- `releases/candidate-2026-10-06/catdesk-room-candidate.bin` 与新构建一致，SHA-256 `baed4b7023c976c8ef655d050774a2f94e2b5fd7797e4ae246245bb0628cc706`。原回退版仍是 HEAD `9e8bd4e` 的 770,288 字节 `.bin`，原 SHA 清单不变。
++- 候选软件预览单独保存在 `assets/candidate-2026-10-06/`，原截图不覆盖。49 张 PNG、3 个 GIF 和状态 JSON 均由固件同源渲染器生成；完整房间 GIF 覆盖真实模型的五分钟循环。八张行为静态检查图明确标注检查设置；所有帧保持精确 2× 网格、≤32 色。
++- 主机严格 C11、ASan/UBSan：7,495 帧原 UI 回归、14,849 帧逐物理像素与 16,908 次有效失效区检查、243 组持久化往返、原触摸回调；新增全路径逐毫秒边界/反应/回绕检查，以及 2,960 帧房间集成检查。集成含静态及真实模型五分钟循环、24 小时校时/未校时、120 次猫触摸、360 次家具入口、周年优先与模型/背景不可变。
++
++封版门槛仍未完成：烧录候选版后的 1–2 小时实机连续运行、逐项触摸和亮度、真实 USB 拔插/掉电恢复、10 月 7 日真实校时后的周年启动。主机模拟和软件 GIF 不代替实机验收；夜间色替换新增的持续渲染开销也要在实机日志与屏幕上确认。此前稳定性反馈适用于下文记录的旧实机版。
++
++## 原实机版记录
++
+ 状态：视觉重制、屏幕移位修正及本轮生活化小装饰已编译、烧录。大布局和功能入口保留，猫及业务状态机不变。用户本轮实机反馈确认“画面稳定，点击正常”，整幅画面持续移位问题已通过目视复验；原功能回归与启动/通信自动检查通过。
+ 
+ ## 真正改变的视觉语言
+diff --git a/README.md b/README.md
+index 0460051..2b68486 100644
+--- a/README.md
++++ b/README.md
+@@ -2,6 +2,8 @@
+ 
+ 送给一个人的双猫像素桌面陪伴屏。原创黄昏房间、橘猫和黑猫、触摸爱心、2024.10.07 纪念日，以及 2026.10.07 的双猫两周年动画。
+ 
++**2026-10-06 产品化候选版已生成，尚未烧录。** 新增按 Mac 同步时间切换的白天 / 黄昏 / 夜晚，以及沙发睡觉、纸箱、毛线、窗台、挡 Mac、闻一闻、追逐和一起睡八种行为。原实机礼物版保留作回退。[昼夜预览](assets/candidate-2026-10-06/room_periods_preview.png)、[完整五分钟猫生活预览](assets/candidate-2026-10-06/room_life_preview.gif)、[候选固件](releases/candidate-2026-10-06/catdesk-room-candidate.bin)。候选版通过主机检查与编译后仍须实机连续运行 1–2 小时，详见[开发进度](CATDESK_PROGRESS.md)。
++
+ ![主页软件预览](assets/home_preview.png)
+ 
+ Waveshare ESP32-S3-Touch-LCD-7 / PCB Rev1.2 / ESP32-S3N16R8，ESP-IDF v5.5.5 + LVGL 9。400×240 逻辑像素以整数 2× 显示在 800×480 屏幕；无抗锯齿、PNG 解码或 alpha 特效。现有 LCD/GT911 初始化、引脚、Flash 参数、分区和 Bootloader 保持原样。
+diff --git a/firmware/components/catdesk_ui/CMakeLists.txt b/firmware/components/catdesk_ui/CMakeLists.txt
+index 082e849..03cd883 100644
+--- a/firmware/components/catdesk_ui/CMakeLists.txt
++++ b/firmware/components/catdesk_ui/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ idf_component_register(
+-    SRCS "catdesk_ui.c" "catdesk_model.c" "catdesk_render.c" "catdesk_cats.c" "catdesk_font.c" "catdesk_link.c" "pixel_ui.c"
++    SRCS "catdesk_ui.c" "catdesk_model.c" "catdesk_render.c" "catdesk_room.c" "catdesk_cats.c" "catdesk_font.c" "catdesk_link.c" "pixel_ui.c"
+     INCLUDE_DIRS "include"
+     REQUIRES catdesk_hal lvgl esp_lvgl_adapter nvs_flash esp_timer esp_driver_uart)
+ string(TIMESTAMP CATDESK_BUILD_EPOCH "%s" UTC)
+diff --git a/firmware/components/catdesk_ui/catdesk_render.c b/firmware/components/catdesk_ui/catdesk_render.c
+index d0d08ca..10b9a71 100644
+--- a/firmware/components/catdesk_ui/catdesk_render.c
++++ b/firmware/components/catdesk_ui/catdesk_render.c
+@@ -4,6 +4,7 @@
+ #include "pixel_theme.h"
+ #include "pixel_ui.h"
+ #include "catdesk_layout.h"
++#include "catdesk_room.h"
+ #include <stdio.h>
+ #include <string.h>
+ 
+@@ -45,6 +46,16 @@ static void hud(uint16_t *p,int cx,int y,const char *s,int scale)
+ static int s_pointer_x=-100,s_pointer_y=-100;
+ static uint32_t s_pointer_ms;
+ static uint32_t s_ambient_ms;
++static uint32_t s_life_ms;
++
++cd_room_period_t cd_room_period(const cd_model_t *m)
++{
++    if(!m->clock_synced)return CD_ROOM_DUSK;
++    if(m->hour>=6 && m->hour<17)return CD_ROOM_DAY;
++    if(m->hour<20 && m->hour>=17)return CD_ROOM_DUSK;
++    return CD_ROOM_NIGHT;
++}
++uint32_t cd_ui_life_ms(void){return s_life_ms;}
+ 
+ void cd_ui_pointer(int x,int y,bool pressed)
+ {s_pointer_x=x;s_pointer_y=y;s_pointer_ms=pressed?160:0;}
+@@ -53,6 +64,7 @@ void cd_ui_visual_tick(uint32_t delta_ms)
+     s_pointer_ms=s_pointer_ms>delta_ms?s_pointer_ms-delta_ms:0;
+     /* Art only: a monotonic minute loop, independent of USB clock updates. */
+     s_ambient_ms=(s_ambient_ms+delta_ms%60000u)%60000u;
++    s_life_ms=(s_life_ms+delta_ms%300000u)%300000u;
+ }
+ bool cd_ui_has_pointer(void)
+ {return s_pointer_ms!=0;}
+@@ -664,24 +676,42 @@ static void paint_pets(uint16_t *p,const cd_model_t *m,bool labels)
+ {
+     for(int i=0;i<2;i++){
+         const cd_cat_t *cat=&m->cats[i];
+-        /* Stepped, opaque grounding shadow stays on the carpet. */
+-        rect(p,cat->x+12,207,17,1,LEAF);rect(p,cat->x+14,208,13,1,LEAF);
++        cd_room_pet_pose_t pose=cd_room_pet_pose(m,(unsigned)i,s_life_ms);
++        /* The same sprite now has a floor, cushion or sill beneath its paws. */
++        if(pose.activity!=CD_ROOM_ACTIVITY_WINDOW && pose.activity!=CD_ROOM_ACTIVITY_BOX){
++            rect(p,pose.x+12,pose.y+37,17,1,LEAF);
++            rect(p,pose.x+14,pose.y+38,13,1,LEAF);
++        }
+         int jump=0;
+-        if(i==0 && cat->state==CD_CAT_TAP){const int jumps[]={0,0,8,13,6,0};jump=jumps[cat->frame%6];}
+-        catdesk_draw_cat(p,CD_WIDTH,cat->x,cat->y-jump,i,cat->state,cat->frame,cat->direction<0);
++        if(i==0 && pose.state==CD_CAT_TAP){const int jumps[]={0,0,8,13,6,0};jump=jumps[pose.frame%6];}
++        uint16_t box_front[20*9];
++        bool in_box=pose.activity==CD_ROOM_ACTIVITY_BOX && pose.y<133;
++        if(in_box)for(int y=0;y<9;y++)
++            memcpy(box_front+y*20,p+(153+y)*CD_WIDTH+63,20*sizeof(*p));
++        catdesk_draw_cat(p,CD_WIDTH,pose.x,pose.y-jump,i,pose.state,pose.frame,pose.direction<0);
++        if(in_box){
++            /* The existing cardboard front hides the body as it settles in. */
++            for(int y=0;y<9;y++)
++                memcpy(p+(153+y)*CD_WIDTH+63,box_front+y*20,20*sizeof(*p));
++        }
+         if(cat->heart_ms) {
+             const int sway[]={0,1,0,-1};
+             int phase=(int)(cat->state_elapsed_ms/220)%4;
+             int rise=cat->heart_ms<800?(800-(int)cat->heart_ms)/180:0;
+-            int hx=cat->x+18+sway[phase],hy=cat->y-13-rise*2;
++            int hx=pose.x+18+sway[phase],hy=pose.y-13-rise*2;
+             if(cat->heart_ms<180)drawPixelHeartOutline(p,CD_WIDTH,hx,hy,1,PINK);
+             else heart(p,hx,hy,1,PINK);
+         }
+         if(labels && cat->bubble_ms){
+-            outline(p,cat->x+4,cat->y-24,32,20,WHITE,INK,1);text(p,cat->x+8,cat->y-20,"喵?",INK,1);
+-            rect(p,cat->x+14,cat->y-4,4,3,INK);rect(p,cat->x+15,cat->y-4,2,2,WHITE);
++            int bubble_y=pose.y-24;if(bubble_y<2)bubble_y=2;
++            outline(p,pose.x+4,bubble_y,32,20,WHITE,INK,1);text(p,pose.x+8,bubble_y+4,"喵?",INK,1);
++            rect(p,pose.x+14,bubble_y+20,4,3,INK);rect(p,pose.x+15,bubble_y+20,2,2,WHITE);
++        }
++        if(labels && pose.state==CD_CAT_SLEEP){text(p,pose.x+30,pose.y+4-(pose.frame%2)*2,"z",CREAM,1);}
++        if(pose.activity==CD_ROOM_ACTIVITY_YARN && pose.state==CD_CAT_TAP && cat->state!=CD_CAT_TAP){
++            /* A few pixels of loose thread twitch; the toy stays by its bowl. */
++            rect(p,337+(pose.frame%2),222,3,1,PT_COZY_PINK);
+         }
+-        if(labels && cat->state==CD_CAT_SLEEP){text(p,cat->x+30,cat->y+4-(cat->frame%2)*2,"z",CREAM,1);}
+     }
+ }
+ 
+@@ -690,7 +720,7 @@ static void paint_ambient(uint16_t *p,const cd_model_t *m)
+     if(m->celebration_active)return;
+     /* A short shooting star stays inside the left window pane, behind its
+        wooden crossbars. It never asks the presenter to redraw the room. */
+-    if(s_ambient_ms>=6000 && s_ambient_ms<6960){
++    if(cd_room_period(m)==CD_ROOM_NIGHT && s_ambient_ms>=6000 && s_ambient_ms<6960){
+         int step=(int)(s_ambient_ms-6000)/80;
+         int x=56+step,y=30+step/2;
+         rect(p,x-3,y-2,1,1,PT_BLUE_LIGHT);
+@@ -699,7 +729,7 @@ static void paint_ambient(uint16_t *p,const cd_model_t *m)
+         rect(p,x,y,2,1,WHITE);rect(p,x+1,y-1,1,1,GOLD);
+     }
+     unsigned moth=s_ambient_ms%30000u;
+-    if(moth>=18000 && moth<20400){
++    if(cd_room_period(m)!=CD_ROOM_DAY && moth>=18000 && moth<20400){
+         /* One tiny visitor to the reading light, on an occasional short arc. */
+         const int dx[]={0,2,4,5,4,2,0,-1};
+         const int dy[]={0,-1,-3,-4,-3,-1,1,2};
+@@ -714,18 +744,81 @@ static void paint_ambient(uint16_t *p,const cd_model_t *m)
+ static void dim_room(uint16_t *p)
+ {
+     /* A discrete night palette substitution. No alpha, fade or new shades. */
+-    const unsigned from[]={WOOD,LIGHT_WOOD,WALL,CREAM,WHITE,GREEN,RUG_LIGHT,PT_BLUE_LIGHT,GOLD,PALE_PINK,PT_COZY_PINK,PT_COZY_BLUE};
+-    const unsigned to[]={DARK_WOOD,WOOD,WALL_SHADE,PT_PAPER_DARK,CREAM,LEAF,GREEN,BLUE,WOOD,PT_RED,PT_RED,BLUE};
+-    uint16_t source[12],target[12];
+-    for(int i=0;i<12;i++){source[i]=cd_color(from[i]);target[i]=cd_color(to[i]);}
+-    for(int i=0;i<CD_WIDTH*CD_HEIGHT;i++)
+-        for(int j=0;j<12;j++)if(p[i]==source[j]){p[i]=target[j];break;}
++    /* Constant cases avoid searching twelve runtime palette entries for
++       every pixel throughout the night. No lookup buffer is allocated. */
++#define ROOM565(c) ((((c)>>19)&31)<<11 | (((c)>>10)&63)<<5 | (((c)>>3)&31))
++    for(int i=0;i<CD_WIDTH*CD_HEIGHT;i++){
++        switch(p[i]){
++        case ROOM565(WOOD):p[i]=ROOM565(DARK_WOOD);break;
++        case ROOM565(LIGHT_WOOD):p[i]=ROOM565(WOOD);break;
++        case ROOM565(WALL):p[i]=ROOM565(WALL_SHADE);break;
++        case ROOM565(CREAM):p[i]=ROOM565(PT_PAPER_DARK);break;
++        case ROOM565(WHITE):p[i]=ROOM565(CREAM);break;
++        case ROOM565(GREEN):p[i]=ROOM565(LEAF);break;
++        case ROOM565(RUG_LIGHT):p[i]=ROOM565(GREEN);break;
++        case ROOM565(PT_BLUE_LIGHT):p[i]=ROOM565(BLUE);break;
++        case ROOM565(GOLD):p[i]=ROOM565(WOOD);break;
++        case ROOM565(PALE_PINK):case ROOM565(PT_COZY_PINK):p[i]=ROOM565(PT_RED);break;
++        case ROOM565(PT_COZY_BLUE):p[i]=ROOM565(BLUE);break;
++        default:break;
++        }
++    }
++#undef ROOM565
++}
++
++static void paint_room_period(uint16_t *p,const cd_model_t *m)
++{
++    cd_room_period_t period=m->celebration_active?CD_ROOM_NIGHT:cd_room_period(m);
++    if(period==CD_ROOM_NIGHT)dim_room(p);
++    int wx=CD_WINDOW_X,wy=CD_WINDOW_Y;
++    unsigned sky=period==CD_ROOM_DAY?PT_COZY_BLUE:period==CD_ROOM_DUSK?PT_ROSE_LIGHT:PT_NIGHT;
++    unsigned horizon=period==CD_ROOM_DAY?PT_BLUE_LIGHT:PT_DUSK;
++    rect(p,wx+5,wy+5,46,24,sky);rect(p,wx+5,wy+19,46,10,horizon);
++    if(period==CD_ROOM_NIGHT){
++        rect(p,wx+38,wy+6,5,6,CREAM);rect(p,wx+41,wy+5,3,6,CREAM);
++        rect(p,wx+43,wy+5,3,5,PT_NIGHT);
++        uint32_t stars=m->celebration_active?0:s_ambient_ms;
++        sparkle(p,wx+15,wy+10,(stars/1400u)%2?PT_BLUE_LIGHT:WHITE);
++        rect(p,wx+28,wy+7,1,1,(stars/2100u)%2?CREAM:WHITE);
++    }else{
++        int cloud=period==CD_ROOM_DAY?(int)(s_ambient_ms/8000u)%5:0;
++        rect(p,wx+8+cloud,wy+10,12,2,CREAM);
++        rect(p,wx+10+cloud,wy+8,7,2,WHITE);
++        rect(p,wx+39,wy+7,4,4,GOLD);
++        if(period==CD_ROOM_DUSK)rect(p,wx+35,wy+17,8,2,GOLD);
++    }
++    for(int i=0;i<4;i++){
++        int xx=wx+6+i*11,yy=wy+24-i%2*3;
++        rect(p,xx,yy,8,6,BLUE);rect(p,xx+1,yy-1,6,1,BLUE);
++        if(period!=CD_ROOM_DAY)rect(p,xx+2,yy+2,1,1,GOLD);
++    }
++    /* Repaint the original mullions; moving sky pixels remain behind them. */
++    rect(p,wx+27,wy+3,2,28,DARK_WOOD);rect(p,wx+27,wy+3,1,28,LIGHT_WOOD);
++    rect(p,wx+3,wy+17,50,2,DARK_WOOD);rect(p,wx+3,wy+17,50,1,LIGHT_WOOD);
++    const int bulbs[][2]={{151,27},{172,31},{194,19},{215,19},{238,26},{241,43}};
++    for(unsigned i=0;i<sizeof(bulbs)/sizeof(bulbs[0]);i++){
++        int x=bulbs[i][0],y=bulbs[i][1];
++        if(period==CD_ROOM_DAY){rect(p,x+1,y+1,2,2,PT_PAPER_DARK);rect(p,x+2,y+1,1,1,WOOD);}
++        else cozy_bulb(p,x,y);
++    }
++    if(period==CD_ROOM_DAY){
++        /* Remove the warm pool with existing wood colors; no new buffer or alpha. */
++        uint16_t outer=cd_color(LIGHT_WOOD),inner=cd_color(PT_CAT_ORANGE_LIGHT),floor=cd_color(WOOD);
++        for(int y=119;y<152;y++)for(int x=110;x<146;x++){
++            uint16_t *pixel=&p[y*CD_WIDTH+x];
++            if(*pixel==outer || *pixel==inner)*pixel=floor;
++        }
++        rect(p,125,110,11,3,PT_PAPER_DARK);rect(p,123,113,15,5,CREAM);
++    }else{
++        rect(p,125,110,11,3,CREAM);rect(p,123,113,15,5,CREAM);
++        rect(p,124,113,2,4,WHITE);rect(p,135,113,2,4,PT_PAPER_DARK);
++    }
+ }
+ 
+ void cd_render_world(uint16_t *p,const uint16_t *bg,const cd_model_t *m)
+ {
+     memcpy(p,bg,CD_WIDTH*CD_HEIGHT*sizeof(*p));
+-    if(m->celebration_active)dim_room(p);
++    paint_room_period(p,m);
+     small_mac(p,m->mac_connected);
+     paint_ambient(p,m);
+     paint_pets(p,m,false);
+@@ -733,7 +826,7 @@ void cd_render_world(uint16_t *p,const uint16_t *bg,const cd_model_t *m)
+ void cd_render_frame(uint16_t *p,const uint16_t *bg,const cd_model_t *m)
+ {
+     memcpy(p,bg,CD_WIDTH*CD_HEIGHT*sizeof(*p));
+-    if(m->celebration_active)dim_room(p);
++    paint_room_period(p,m);
+     paint_ambient(p,m);
+     /* Tiny information is carved into the window ledge and keepsake. */
+     drawPixelSun(p,CD_WIDTH,48,60,1);
+@@ -815,6 +908,24 @@ void cd_ui_drag(cd_model_t *m,int x,int y)
+     }
+ }
+ 
++static bool room_cat_hit(const cd_room_pet_pose_t *pose,unsigned kind,int x,int y)
++{
++    if(pose->activity==CD_ROOM_ACTIVITY_NONE)
++        return inside(x,y,pose->x-3,pose->y-5,46,46);
++    int jump=0;
++    if(kind==CD_CAT_ORANGE && pose->state==CD_CAT_TAP){
++        const int jumps[]={0,0,8,13,6,0};jump=jumps[pose->frame%6];
++    }
++    int column_x=x-pose->x,row_y=y-pose->y+jump;
++    if(column_x<0 || column_x>=CD_CAT_WIDTH || row_y<0 || row_y>=CD_CAT_HEIGHT)return false;
++    if(pose->activity==CD_ROOM_ACTIVITY_BOX && pose->y<133 && inside(x,y,63,153,20,9))return false;
++    /* Render one column of the real sprite into 80 bytes. Transparent space
++       around a cat sitting on furniture must leave that furniture reachable. */
++    uint16_t column[CD_CAT_HEIGHT]={0};
++    catdesk_draw_cat(column,1,-column_x,0,(int)kind,pose->state,pose->frame,pose->direction<0);
++    return column[row_y]!=0;
++}
++
+ void cd_ui_press(cd_model_t *m,int x,int y)
+ {
+     if(m->popup!=CD_POPUP_NONE){
+@@ -844,7 +955,10 @@ void cd_ui_press(cd_model_t *m,int x,int y)
+         return;
+     }
+     /* Cats get generous touch targets and take priority on the floor. */
+-    for(int i=1;i>=0;i--)if(inside(x,y,m->cats[i].x-3,m->cats[i].y-5,46,46)){cd_model_tap_cat(m,i);return;}
++    for(int i=1;i>=0;i--){
++        cd_room_pet_pose_t pose=cd_room_pet_pose(m,(unsigned)i,s_life_ms);
++        if(room_cat_hit(&pose,(unsigned)i,x,y)){cd_model_tap_cat(m,i);return;}
++    }
+     if(inside(x,y,358,10,26,24)){m->popup=CD_POPUP_SETTINGS;return;}
+     if(inside(x,y,38,16,81,63)){m->popup=CD_POPUP_WEATHER;return;}
+     if(inside(x,y,184,19,53,50)){
+diff --git a/firmware/components/catdesk_ui/catdesk_ui.c b/firmware/components/catdesk_ui/catdesk_ui.c
+index 1c40af4..7b780e7 100644
+--- a/firmware/components/catdesk_ui/catdesk_ui.c
++++ b/firmware/components/catdesk_ui/catdesk_ui.c
+@@ -3,6 +3,7 @@
+ #include "catdesk_model.h"
+ #include "catdesk_render.h"
+ #include "catdesk_layout.h"
++#include "catdesk_room.h"
+ #include "catdesk_link.h"
+ #include "driver/uart.h"
+ #include "esp_heap_caps.h"
+@@ -159,19 +160,17 @@ static void present_ambient_area(int x1,int y1,int x2,int y2)
+ 
+ static void present_frame(void)
+ {
++    static uint32_t presented_life_ms;
++    uint32_t life_ms=cd_ui_life_ms();
+     cd_render_frame(s_frame, s_background, &s_model);
+     lv_area_t dirty={.x1=CD_WIDTH,.y1=CD_HEIGHT,.x2=-1,.y2=-1};
+     prepare_brightness(35u+s_model.brightness*65u/100u);
+     if(!s_presented_once || s_model.brightness!=s_presented.brightness ||
+-       s_model.celebration_active!=s_presented.celebration_active) {
++       s_model.celebration_active!=s_presented.celebration_active ||
++       cd_room_period(&s_model)!=cd_room_period(&s_presented)) {
+         expand_area(0,0,399,239,&dirty);
+     } else {
+         /* Only these regions can animate. Keep the static room in place. */
+-        for(int i=0;i<2;i++) {
+-            int left=s_model.cats[i].x<s_presented.cats[i].x?s_model.cats[i].x:s_presented.cats[i].x;
+-            int right=s_model.cats[i].x>s_presented.cats[i].x?s_model.cats[i].x:s_presented.cats[i].x;
+-            expand_area(left-4,138,right+44,212,&dirty);
+-        }
+         if(s_model.celebration_active || s_presented.celebration_active || s_model.notice_ms || s_presented.notice_ms)
+             expand_area(102,96,302,187,&dirty);
+         if(s_model.popup!=CD_POPUP_NONE || s_presented.popup!=CD_POPUP_NONE)
+@@ -188,11 +187,20 @@ static void present_frame(void)
+         lv_area_t area = { .x1 = dirty.x1 * 2, .y1 = dirty.y1 * 2, .x2 = dirty.x2 * 2 + 1, .y2 = dirty.y2 * 2 + 1 };
+         lv_obj_invalidate_area(s_image, &area);
+     }
+-    /* Keep occasional 21x14/17x18 effects separate from the cats' dirty box;
+-       joining the distant window to the floor would copy most of the screen. */
+-    present_ambient_area(52,27,72,40);
++    /* Each pet has its own small moving region, including its old position.
++       Window visitors never merge with a cat on the opposite side of the room. */
++    for(unsigned i=0;i<CD_CAT_COUNT;i++){
++        cd_room_pet_pose_t now=cd_room_pet_pose(&s_model,i,life_ms);
++        cd_room_pet_pose_t old=cd_room_pet_pose(&s_presented,i,presented_life_ms);
++        int x1=now.x<old.x?now.x:old.x,x2=now.x>old.x?now.x:old.x;
++        int y1=now.y<old.y?now.y:old.y,y2=now.y>old.y?now.y:old.y;
++        present_ambient_area(x1-4,y1-32,x2+44,y2+41);
++    }
++    present_ambient_area(50,27,100,54);
+     present_ambient_area(140,102,156,119);
++    present_ambient_area(337,220,344,223);
+     s_presented=s_model;
++    presented_life_ms=life_ms;
+     s_presented_once=true;
+     ++s_frames;
+ }
+diff --git a/firmware/components/catdesk_ui/include/catdesk_render.h b/firmware/components/catdesk_ui/include/catdesk_render.h
+index f84b526..a4ac1cc 100644
+--- a/firmware/components/catdesk_ui/include/catdesk_render.h
++++ b/firmware/components/catdesk_ui/include/catdesk_render.h
+@@ -1,5 +1,9 @@
+ #pragma once
+ #include "catdesk_model.h"
++typedef enum { CD_ROOM_DAY, CD_ROOM_DUSK, CD_ROOM_NIGHT } cd_room_period_t;
++/* Shanghai wall-clock periods; an unsynced boot keeps the familiar dusk. */
++cd_room_period_t cd_room_period(const cd_model_t *model);
++uint32_t cd_ui_life_ms(void);
+ #define CD_WIDTH 400
+ #define CD_HEIGHT 240
+ uint16_t cd_color(unsigned rgb);
+diff --git a/releases/README.md b/releases/README.md
+index c15a8f0..f418f96 100644
+--- a/releases/README.md
++++ b/releases/README.md
+@@ -1,5 +1,7 @@
+ # CatDesk 原创生活 RPG 视觉版
+ 
++2026-10-06 新增独立的[昼夜与猫生活候选固件](candidate-2026-10-06/catdesk-room-candidate.bin)：773,312 字节，仅比下述已烧录版增加 3,024 字节；应用分区剩余 275,264 字节（26.3%）。SHA-256 `baed4b7023c976c8ef655d050774a2f94e2b5fd7797e4ae246245bb0628cc706`，同目录保存 SHA 清单与构建配置。它**尚未烧录，尚未完成 1–2 小时实机验收**，没有替换原礼物 `.bin` 或设备上已确认稳定的版本。候选源码与验收说明见 `../CATDESK_PROGRESS.md`；下文为原实机回退版记录。
++
+ 当前实机固件为 `catdesk-gift-2026-10-07.bin`，与 `firmware/build-rpg-final/catdesk.bin` 完全一致，大小 **770,288 字节**。SHA-256 见 `SHA256SUMS`，应用分区余量约 **26.5%**。
+ 
+ 场景已重新构图为大片木地板、短北墙、三分之四视角家具；双猫 44 帧重画为 25–29 px 高的宠物 NPC。业务模型、保存格式、USB、Helper、LCD/GPIO/RGB 硬件参数保持原样。仅家具入口坐标随物件移动，以及周年当天点相框直接进入原有事件。
+diff --git a/tools/check.sh b/tools/check.sh
+index dabdcc7..0aed4ff 100755
+--- a/tools/check.sh
++++ b/tools/check.sh
+@@ -12,7 +12,7 @@ clang "$@" tools/test_model.c firmware/components/catdesk_ui/catdesk_model.c -o
+ clang "$@" tools/test_link.c firmware/components/catdesk_ui/catdesk_model.c firmware/components/catdesk_ui/catdesk_link.c -o "$CATDESK_CHECK_DIR/link"
+ "$CATDESK_CHECK_DIR/link"
+ clang "$@" tools/test_ui.c firmware/components/catdesk_ui/catdesk_model.c \
+-  firmware/components/catdesk_ui/catdesk_render.c firmware/components/catdesk_ui/catdesk_cats.c \
++  firmware/components/catdesk_ui/catdesk_render.c firmware/components/catdesk_ui/catdesk_room.c firmware/components/catdesk_ui/catdesk_cats.c \
+   firmware/components/catdesk_ui/catdesk_font.c firmware/components/catdesk_ui/pixel_ui.c -o "$CATDESK_CHECK_DIR/ui"
+ "$CATDESK_CHECK_DIR/ui"
+ clang "$@" tools/test_pixel_ui.c firmware/components/catdesk_ui/pixel_ui.c \
+@@ -21,3 +21,7 @@ clang "$@" tools/test_pixel_ui.c firmware/components/catdesk_ui/pixel_ui.c \
+ python3 tools/test_presenter.py
+ python3 tools/test_persistence.py
+ python3 tools/test_feedback.py
++clang "$@" tools/test_room.c firmware/components/catdesk_ui/catdesk_model.c \
++  firmware/components/catdesk_ui/catdesk_room.c -o "$CATDESK_CHECK_DIR/room"
++"$CATDESK_CHECK_DIR/room"
++python3 tools/test_room_integration.py
+diff --git a/tools/generate_previews.py b/tools/generate_previews.py
+index d3f19b1..0d88ec2 100644
+--- a/tools/generate_previews.py
++++ b/tools/generate_previews.py
+@@ -26,6 +26,19 @@ from PIL import Image, ImageChops, PngImagePlugin
+ ROOT = Path(__file__).resolve().parents[1]
+ COMPONENT = ROOT / "firmware/components/catdesk_ui"
+ FRAME_MS = 120
++ROOM_FRAME_MS = 400
++ROOM_LOOP_MS = 300000
++ROOM_ACTIVITY_NAMES = ("none", "sofa", "box", "yarn", "window", "mac", "sniff", "chase", "cuddle")
++ROOM_INSPECTIONS = (
++    ("sofa", 45000, {"rendered_orange":1}),
++    ("box", 75000, {"rendered_black":2}),
++    ("yarn", 105000, {"rendered_orange":3}),
++    ("window", 135000, {"rendered_black":4}),
++    ("mac", 165000, {"rendered_orange":5}),
++    ("sniff", 195000, {"rendered_orange":6, "rendered_black":6}),
++    ("chase", 230000, {"rendered_orange":7, "rendered_black":7}),
++    ("cuddle", 270000, {"rendered_orange":8, "rendered_black":8}),
++)
+ POPUPS = (
+     ("anniversary-popup", "anniversary_popup_preview.png", 1),
+     ("todo", "todo_preview.png", 2),
+@@ -68,7 +81,8 @@ def png_info(raw: bool) -> PngImagePlugin.PngInfo:
+     return info
+ 
+ 
+-def save_exact_gif(frames: list[Image.Image], target: Path) -> None:
++def save_exact_gif(frames: list[Image.Image], target: Path, frame_ms: int = FRAME_MS,
++                   comment: str = "Actual CatDesk firmware C renderer software preview") -> None:
+     # A common palette preserves each renderer color with no dithering or
+     # color drift between frames. The firmware uses far fewer than 256 colors.
+     colors = set()
+@@ -85,16 +99,16 @@ def save_exact_gif(frames: list[Image.Image], target: Path) -> None:
+     palette.putpalette([channel for color in ordered for channel in color])
+     encoded = [frame.quantize(palette=palette, dither=Image.Dither.NONE).resize((800, 480), Image.Resampling.NEAREST)
+                for frame in frames]
+-    encoded[0].save(target, save_all=True, append_images=encoded[1:], duration=FRAME_MS,
+-                    loop=0, optimize=True, disposal=1, comment=b"Actual CatDesk firmware C renderer software preview")
++    encoded[0].save(target, save_all=True, append_images=encoded[1:], duration=frame_ms,
++                    loop=0, optimize=True, disposal=1, comment=comment.encode("utf-8"))
+     with Image.open(target) as verify:
+         total_duration = 0
+         for index in range(verify.n_frames):
+             verify.seek(index)
+             total_duration += verify.info.get("duration", 0)
+         assert verify.size == (800, 480)
+-        assert total_duration == len(frames) * FRAME_MS
+-    print(f"{target.name}: {len(frames)} x {FRAME_MS} ms samples, {total_duration / 1000:.2f} s, "
++        assert total_duration == len(frames) * frame_ms
++    print(f"{target.name}: {len(frames)} x {frame_ms} ms samples, {total_duration / 1000:.2f} s, "
+           f"{target.stat().st_size / 1024:.1f} KiB")
+ 
+ 
+@@ -104,6 +118,7 @@ def main() -> None:
+     parser.add_argument("--cc", default=os.environ.get("CC", "clang"))
+     parser.add_argument("--raw", action="store_true", help="Export the undimmed renderer palette")
+     parser.add_argument("--skip-gifs", action="store_true", help="Only regenerate static PNGs")
++    parser.add_argument("--skip-room-gif", action="store_true", help="Skip the full five-minute production room-life loop")
+     parser.add_argument("--cats-duration-ms", type=int, default=42000,
+                         help="Natural cat simulation duration; default includes tap, blink, walk and sleep")
+     args = parser.parse_args()
+@@ -116,7 +131,7 @@ def main() -> None:
+         temporary = Path(temporary)
+         executable = temporary / "render_preview"
+         sources = [ROOT / "tools/render_preview.c"] + [COMPONENT / name for name in
+-                    ("catdesk_model.c", "catdesk_render.c", "catdesk_font.c", "catdesk_cats.c", "pixel_ui.c")]
++                    ("catdesk_model.c", "catdesk_render.c", "catdesk_room.c", "catdesk_font.c", "catdesk_cats.c", "pixel_ui.c")]
+         subprocess.run([args.cc, "-std=c11", "-O2", "-I", str(COMPONENT / "include"),
+                         *map(str, sources), "-o", str(executable)], check=True)
+         ppm = temporary / "frame.ppm"
+@@ -137,15 +152,24 @@ def main() -> None:
+                     raise RuntimeError(f"{mode} exceeds the shared 32-color theme budget")
+             return frame, state
+ 
++        snapshot_states = {}
++
+         def snapshot(mode: str, filename: str, elapsed: int = 0, taps: str = "none") -> tuple[Image.Image, dict]:
+             frame, state = render(mode, elapsed, taps)
+             large = frame.resize((800, 480), Image.Resampling.NEAREST)
+-            info = metadata
++            info = png_info(args.raw)
++            info.add_text("Scenario", mode)
++            info.add_text("State", json.dumps(state, sort_keys=True))
+             if state.get("inspection_only"):
+-                info = png_info(args.raw)
+-                info.add_text("Inspection", "Manually selected detail component for the 730-day typography; "
+-                              "the actual October 7 home-frame tap directly replays the anniversary event.")
++                if state["inspection_kind"] == "room-life":
++                    info.add_text("Inspection", "Room-life schedule inspection: actual model tick and actual renderer; "
++                                  "the model's natural approach event is suppressed for this single snapshot. "
++                                  "room_life_preview.gif retains all production behavior.")
++                else:
++                    info.add_text("Inspection", "Manually selected detail component for the 730-day typography; "
++                                  "the actual October 7 home-frame tap directly replays the anniversary event.")
+             large.save(args.output_dir / filename, pnginfo=info, optimize=True)
++            snapshot_states[filename] = state
+             return large, state
+ 
+         snapshot("home", "home_preview.png", 600)
+@@ -192,7 +216,38 @@ def main() -> None:
+         for index, mode in enumerate(("home-connected", "todo-progress", "focus-home", "focus-paused", "mac-connected", "focus-completed")):
+             states.paste(state_images[mode], ((index % 2)*800,(index // 2)*480))
+         states.save(args.output_dir / "states_preview.png", pnginfo=metadata, optimize=True)
++        periods = Image.new("RGB", (2400,480))
++        for index, period in enumerate(("day", "dusk", "night")):
++            image, state = snapshot(f"room-{period}", f"room_{period}_preview.png", 12000)
++            assert state["period"] == index and state["clock_synced"] == 1, (period, state)
++            assert state["inspection_only"] == 0
++            periods.paste(image, (index*800,0))
++        periods.save(args.output_dir / "room_periods_preview.png", pnginfo=metadata, optimize=True)
++        room_inspections = Image.new("RGB", (1600,1920))
++        for index, (activity, elapsed, expected) in enumerate(ROOM_INSPECTIONS):
++            image, state = snapshot("room-life-inspect", f"room_{activity}_inspection.png", elapsed)
++            assert state["inspection_only"] == 1 and state["inspection_kind"] == "room-life"
++            assert state["approach_active"] == 0
++            assert all(state[kind]["activity"] == value for kind,value in expected.items()), (activity,state)
++            room_inspections.paste(image, ((index%2)*800,(index//2)*480))
++        inspection_metadata = png_info(args.raw)
++        inspection_metadata.add_text("Inspection", "Eight room-life schedule inspections; each frame suppresses the natural "
++                                     "model approach event for comparison. Row-major: sofa, box, yarn, window, mac, sniff, chase, cuddle.")
++        room_inspections.save(args.output_dir / "room_life_inspections.png", pnginfo=inspection_metadata, optimize=True)
++        preview_manifest = {
++            "description":"Actual firmware software previews. See PNG metadata for inspection setup.",
++            "room_activity_names":ROOM_ACTIVITY_NAMES,
++            "snapshots":snapshot_states,
++            "animations":{},
++        }
++
++        def write_manifest() -> None:
++            (args.output_dir / "preview_states.json").write_text(
++                json.dumps(preview_manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
++
++        write_manifest()
+         print("PNG snapshots: textless world, all 6 popups plus real Mac, todo, focus, anniversary and brightness states")
++        print("Room snapshots: real synced day, dusk and night; eight explicitly labeled schedule inspections")
+         print("Every source frame validated: exact 2x pixel grid and at most 32 shared colors")
+         if args.skip_gifs:
+             return
+@@ -232,6 +287,28 @@ def main() -> None:
+         assert orange_tap and black_tap and rapid_bubble, "Incomplete real touch interaction timeline"
+         save_exact_gif(cat_frames, args.output_dir / "cats_live_preview.gif")
+         print("Cat model coverage: idle, blink, walk, sleep, orange jump, black paw and rapid-tap bubble")
++        del cat_frames
++        if not args.skip_room_gif:
++            room_frames, activities, natural_approach_samples = [], set(), 0
++            for elapsed in range(0, ROOM_LOOP_MS, ROOM_FRAME_MS):
++                frame, state = render("room-life", elapsed)
++                assert state["inspection_only"] == 0
++                room_frames.append(frame)
++                activities.update((state["rendered_orange"]["activity"], state["rendered_black"]["activity"]))
++                natural_approach_samples += state["approach_active"] != 0
++            assert activities == set(range(9)), ("Incomplete production room-life loop", activities)
++            assert natural_approach_samples > 0, "Production model natural approaches were not exercised"
++            save_exact_gif(room_frames, args.output_dir / "room_life_preview.gif", ROOM_FRAME_MS,
++                           "Actual CatDesk firmware production room-life loop; 300 seconds sampled every 400ms; "
++                           "real natural approaches retained, no inspection overrides")
++            preview_manifest["animations"]["room_life_preview.gif"] = {
++                "scenario":"room-life", "inspection_only":False, "duration_ms":ROOM_LOOP_MS,
++                "sample_ms":ROOM_FRAME_MS, "sample_count":len(room_frames),
++                "observed_activities":[ROOM_ACTIVITY_NAMES[activity] for activity in sorted(activities)],
++                "natural_approach_samples":natural_approach_samples,
++            }
++            write_manifest()
++            print("Production room-life coverage: five environmental activities and three paired events, with natural approach interruptions")
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/tools/render_preview.c b/tools/render_preview.c
+index 4e48914..8dfdc79 100644
+--- a/tools/render_preview.c
++++ b/tools/render_preview.c
+@@ -1,4 +1,5 @@
+ #include "catdesk_render.h"
++#include "catdesk_room.h"
+ #include "pixel_ui.h"
+ #include "pixel_theme.h"
+ #include <stdio.h>
+@@ -14,12 +15,14 @@
+  * todo-progress, focus, focus-home, focus-running, focus-paused,
+  * focus-completed, focus-completed-popup, weather, mac, mac-connected,
+  * mac-battery, settings, settings-min, settings-max, components,
++ * room-day, room-dusk, room-night, room-life, room-life-inspect,
+  * focus-pressed, todo-pressed, anniversary-pressed, close-pressed.
+  * TAPS: none, orange, black, both, rapid, live.
+  * The timeline is stepped at the model's real 50 ms animation cadence.
+  */
+ typedef struct { unsigned at_ms; cd_cat_kind_t kind; } tap_event_t;
+-typedef enum { POST_NONE, POST_ANNIVERSARY_INSPECTION, POST_ANNIVERSARY_REPLAY, POST_FOCUS, POST_PAUSE } post_action_t;
++typedef enum { POST_NONE, POST_ANNIVERSARY_INSPECTION, POST_ANNIVERSARY_REPLAY, POST_FOCUS, POST_PAUSE,
++               POST_ROOM_LIFE_INSPECTION } post_action_t;
+ 
+ /* Scenario setup calls the same UI actions and clock APIs as firmware.
+  * Mac transport values are applied to the model without opening USB. */
+@@ -30,6 +33,16 @@ static int setup_scenario(cd_model_t *m,const char *mode,post_action_t *post)
+     if(!strcmp(mode,"world-connected")){m->mac_connected=true;return 1;}
+     if(!strcmp(mode,"components"))return 1;
+     if(!strcmp(mode,"home"))return 1;
++    /* The firmware link sets clock_synced after accepting a Mac clock.
++     * These host fixtures apply that same transport-owned flag. */
++    if(!strcmp(mode,"room-day")){cd_model_set_time(m,1791259200);m->clock_synced=true;return 1;}
++    if(!strcmp(mode,"room-dusk")){cd_model_set_time(m,1791280800);m->clock_synced=true;return 1;}
++    if(!strcmp(mode,"room-night") || !strcmp(mode,"room-life") || !strcmp(mode,"room-life-inspect")){
++        cd_model_set_time(m,1791295200);
++        m->clock_synced=true;
++        if(!strcmp(mode,"room-life-inspect"))*post=POST_ROOM_LIFE_INSPECTION;
++        return 1;
++    }
+     if(!strcmp(mode,"home-normal")){cd_model_set_time(m,1791456120);return 1;}
+     if(!strcmp(mode,"home-connected")){m->mac_connected=true;return 1;}
+     if(!strcmp(mode,"anniversary") || !strcmp(mode,"home-anniversary") || !strcmp(mode,"anniversary-day-popup") || !strcmp(mode,"anniversary-replay")){
+@@ -135,6 +148,10 @@ int main(int argc,char **argv)
+     /* Oct 7's real frame tap replays the event. The 730-day window below
+      * is explicitly an inspection fixture for the shared detail artwork. */
+     if(post==POST_ANNIVERSARY_INSPECTION)m.popup=CD_POPUP_ANNIVERSARY;
++    /* A schedule inspection suppresses a model's brief natural approach
++     * event so every room pose can be compared at its intended timestamp.
++     * The room-life animation leaves the real model untouched. */
++    if(post==POST_ROOM_LIFE_INSPECTION)m.approach_active=false;
+     if(post==POST_ANNIVERSARY_REPLAY){
+         cd_ui_press(&m,210,42);cd_model_tick(&m,200);cd_ui_visual_tick(200);
+     }
+@@ -162,17 +179,32 @@ int main(int argc,char **argv)
+     }
+     FILE *f=fopen(argv[1],"wb");if(!f){free(bg);free(p);return 2;}
+     fprintf(f,"P6\n%d %d\n255\n",CD_WIDTH*2,CD_HEIGHT*2);
+-    for(int y=0;y<CD_HEIGHT*2;y++)for(int x=0;x<CD_WIDTH*2;x++){
+-        unsigned c=p[(y/2)*CD_WIDTH+x/2];if(!raw)c=dim((uint16_t)c,m.brightness);
+-        unsigned char rgb[]={((c>>11)&31)*255/31,((c>>5)&63)*255/63,(c&31)*255/31};
+-        if(fwrite(rgb,1,3,f)!=3){fclose(f);free(bg);free(p);return 2;}
++    unsigned char row[CD_WIDTH*2*3];
++    for(int y=0;y<CD_HEIGHT*2;y++){
++        for(int x=0;x<CD_WIDTH*2;x++){
++            unsigned c=p[(y/2)*CD_WIDTH+x/2];if(!raw)c=dim((uint16_t)c,m.brightness);
++            row[x*3]=(unsigned char)(((c>>11)&31)*255/31);
++            row[x*3+1]=(unsigned char)(((c>>5)&63)*255/63);
++            row[x*3+2]=(unsigned char)((c&31)*255/31);
++        }
++        if(fwrite(row,1,sizeof(row),f)!=sizeof(row)){fclose(f);free(bg);free(p);return 2;}
+     }
+     int status=fclose(f);
++    cd_room_pet_pose_t orange=cd_room_pet_pose(&m,CD_CAT_ORANGE,cd_ui_life_ms());
++    cd_room_pet_pose_t black=cd_room_pet_pose(&m,CD_CAT_BLACK,cd_ui_life_ms());
+     fprintf(stderr,"{\"elapsed_ms\":%u,\"orange\":%d,\"black\":%d,\"phase\":%d,\"heart_ms\":%u,\"popup\":%d,\"bubble_ms\":%u,\"brightness\":%u,"
+             "\"mac_connected\":%d,\"mac_charging\":%d,\"todo_count\":%u,\"todo_checked\":%u,\"focus_running\":%d,"
+-            "\"focus_remaining_ms\":%u,\"notice_ms\":%u,\"elapsed_days\":%ld,\"date\":\"%04d-%02d-%02d\",\"pointer_active\":%d,\"inspection_only\":%d}\n",
++            "\"focus_remaining_ms\":%u,\"notice_ms\":%u,\"elapsed_days\":%ld,\"date\":\"%04d-%02d-%02d\",\"pointer_active\":%d,\"inspection_only\":%d,"
++            "\"inspection_kind\":\"%s\",\"clock_synced\":%d,\"hour\":%d,\"period\":%d,\"life_ms\":%u,\"approach_active\":%d,"
++            "\"rendered_orange\":{\"x\":%d,\"y\":%d,\"state\":%d,\"frame\":%d,\"direction\":%d,\"activity\":%d},"
++            "\"rendered_black\":{\"x\":%d,\"y\":%d,\"state\":%d,\"frame\":%d,\"direction\":%d,\"activity\":%d}}\n",
+             elapsed,m.cats[0].state,m.cats[1].state,m.celebration_phase,m.celebration_ms,m.popup,m.cats[0].bubble_ms,m.brightness,
+             m.mac_connected,m.mac_charging,m.todo_count,m.todo_checked,m.focus_running,m.focus_remaining_ms,m.notice_ms,
+-            (long)m.elapsed_days,m.year,m.month,m.day,cd_ui_has_pointer(),post==POST_ANNIVERSARY_INSPECTION);
++            (long)m.elapsed_days,m.year,m.month,m.day,cd_ui_has_pointer(),
++            post==POST_ANNIVERSARY_INSPECTION || post==POST_ROOM_LIFE_INSPECTION,
++            post==POST_ROOM_LIFE_INSPECTION?"room-life":post==POST_ANNIVERSARY_INSPECTION?"anniversary-detail":"none",
++            m.clock_synced,m.hour,cd_room_period(&m),cd_ui_life_ms(),m.approach_active,
++            orange.x,orange.y,orange.state,orange.frame,orange.direction,orange.activity,
++            black.x,black.y,black.state,black.frame,black.direction,black.activity);
+     free(bg);free(p);return status?2:0;
+ }
+diff --git a/tools/test_feedback.py b/tools/test_feedback.py
+index 342cb41..4fdf5b1 100644
+--- a/tools/test_feedback.py
++++ b/tools/test_feedback.py
+@@ -89,6 +89,8 @@ SUFFIX = r'''
+ static void reset(void)
+ {
+     cd_model_init(&s_model, INT64_C(1791216000));
++    /* A fresh boot resets both the model and its independent art clock. */
++    cd_ui_visual_tick((300000u-cd_ui_life_ms())%300000u);
+     cd_ui_pointer(-100, -100, false);
+     fake_now_us = INT64_C(10000000);
+     s_last_tick_us = s_last_save_us = s_last_log_us = fake_now_us;
+@@ -419,7 +421,7 @@ def main() -> None:
+             "-fsanitize=address,undefined", "-fno-omit-frame-pointer", "-g",
+             "-I" + str(component / "include"), str(generated),
+             *(str(component / name) for name in (
+-                "catdesk_model.c", "catdesk_render.c", "pixel_ui.c", "catdesk_cats.c", "catdesk_font.c"
++                "catdesk_model.c", "catdesk_render.c", "catdesk_room.c", "pixel_ui.c", "catdesk_cats.c", "catdesk_font.c"
+             )), "-o", str(binary)
+         ], check=True)
+         subprocess.run([str(binary)], check=True)
+diff --git a/tools/test_presenter.py b/tools/test_presenter.py
+index 66fa721..8e4eeb7 100644
+--- a/tools/test_presenter.py
++++ b/tools/test_presenter.py
+@@ -15,6 +15,7 @@ PREFIX = r'''
+ #include "catdesk_render.h"
+ #include "catdesk_cats.h"
+ #include "catdesk_layout.h"
++#include "catdesk_room.h"
+ #include <assert.h>
+ #include <inttypes.h>
+ #include <stdbool.h>
+@@ -35,7 +36,7 @@ static uint32_t s_frames;
+ static lv_obj_t s_image_value;
+ static lv_obj_t *s_image = &s_image_value;
+ static bool invalidated;
+-static lv_area_t invalidations[3];
++static lv_area_t invalidations[6];
+ static unsigned invalidation_calls, frame_invalidations;
+ 
+ static void lv_obj_invalidate_area(lv_obj_t *image, const lv_area_t *area)
+@@ -46,7 +47,7 @@ static void lv_obj_invalidate_area(lv_obj_t *image, const lv_area_t *area)
+     assert(area->x1 <= area->x2 && area->y1 <= area->y2);
+     assert(area->x1 % 2 == 0 && area->y1 % 2 == 0);
+     assert(area->x2 % 2 == 1 && area->y2 % 2 == 1);
+-    assert(frame_invalidations < 3);
++    assert(frame_invalidations < 6);
+     invalidated = true;
+     invalidations[frame_invalidations++] = *area;
+     ++invalidation_calls;
+@@ -276,21 +277,36 @@ static void test_mixed_frames(unsigned count)
+ static void test_ambient_regions(void)
+ {
+     cd_model_init(&s_model,OCT_6);
++    s_model.clock_synced=true;
+     cd_ui_pointer(-1,-1,false);
+     check_frame("ambient fixed room setup");
+     const cd_model_t before=s_model;
+     unsigned window_frames=0,moth_frames=0;
+     for(unsigned tick=0;tick<750;tick++){
++        cd_room_pet_pose_t old[CD_CAT_COUNT];
++        for(unsigned i=0;i<CD_CAT_COUNT;i++)old[i]=cd_room_pet_pose(&s_model,i,cd_ui_life_ms());
+         cd_ui_visual_tick(80);
+         check_frame("one minute of independent art effects");
+         for(unsigned i=0;i<frame_invalidations;i++){
+             const lv_area_t *a=&invalidations[i];
+-            if(a->x1>=104 && a->x2<=145 && a->y1>=54 && a->y2<=81)++window_frames;
++            if(a->x1>=100 && a->x2<=201 && a->y1>=54 && a->y2<=109)++window_frames;
+             else if(a->x1>=280 && a->x2<=313 && a->y1>=204 && a->y2<=239)++moth_frames;
+-            else { fprintf(stderr,"Ambient invalidated outside tiny effect regions\n");exit(1); }
++            else {
++                bool pet_area=false;
++                for(unsigned kind=0;kind<CD_CAT_COUNT;kind++){
++                    cd_room_pet_pose_t now=cd_room_pet_pose(&s_model,kind,cd_ui_life_ms());
++                    int x1=now.x<old[kind].x?now.x:old[kind].x;
++                    int x2=now.x>old[kind].x?now.x:old[kind].x;
++                    int y1=now.y<old[kind].y?now.y:old[kind].y;
++                    int y2=now.y>old[kind].y?now.y:old[kind].y;
++                    if(a->x1>=(x1-4)*2 && a->x2<=(x2+44)*2+1 &&
++                       a->y1>=(y1-32)*2 && a->y2<=(y2+41)*2+1)pet_area=true;
++                }
++                assert(pet_area);
++            }
+         }
+     }
+-    assert(window_frames>0 && window_frames<30 && moth_frames>0 && moth_frames<100);
++    assert(window_frames>0 && window_frames<150 && moth_frames>0 && moth_frames<100);
+     assert(memcmp(&s_model,&before,sizeof(s_model))==0);
+     /* Catch-up arithmetic and host wall-clock corrections must not turn
+        art into a model mutation or restart its independent animation loop. */
+@@ -307,6 +323,23 @@ static void test_ambient_regions(void)
+     check_frame("ambient room resumes after cutscene");
+ }
+ 
++static void test_room_cycle(void)
++{
++    cd_model_init(&s_model,OCT_6+12*3600);
++    s_model.clock_synced=true;
++    cd_ui_visual_tick((300000u-cd_ui_life_ms())%300000u);
++    check_frame("five-minute room setup");
++    for(unsigned tick=0;tick<3750;tick++){
++        cd_model_tick(&s_model,80);
++        cd_ui_visual_tick(80);
++        if(tick==1250)cd_model_set_time(&s_model,OCT_6+17*3600);
++        if(tick==2500)cd_model_set_time(&s_model,OCT_6+20*3600);
++        if(tick==3100)s_model.clock_synced=false;
++        check_frame("full room life with day/dusk/night corrections");
++    }
++    assert(cd_ui_life_ms()==0);
++}
++
+ int main(int argc, char **argv)
+ {
+     unsigned count = argc > 1 ? (unsigned)strtoul(argv[1], NULL, 10) : 10000;
+@@ -321,6 +354,7 @@ int main(int argc, char **argv)
+     test_transitions();
+     test_mixed_frames(count);
+     test_ambient_regions();
++    test_room_cycle();
+     printf("CatDesk presenter: %u frames, every 800x480 pixel and dirty rectangle checked; %u invalidations passed.\n",
+         checked_frames, invalidation_calls);
+     free(s_background); free(s_frame); free(s_physical);
+@@ -353,7 +387,7 @@ def main() -> None:
+             "-fsanitize=address,undefined", "-fno-omit-frame-pointer", "-g",
+             "-I" + str(component / "include"), str(generated),
+             *(str(component / name) for name in (
+-                "catdesk_model.c", "catdesk_render.c", "catdesk_cats.c", "catdesk_font.c", "pixel_ui.c"
++                "catdesk_model.c", "catdesk_render.c", "catdesk_room.c", "catdesk_cats.c", "catdesk_font.c", "pixel_ui.c"
+             )), "-o", str(binary),
+         ]
+         subprocess.run(command, check=True)
+diff --git a/firmware/components/catdesk_ui/catdesk_room.c b/firmware/components/catdesk_ui/catdesk_room.c
+new file mode 100644
+index 0000000..fb08d4d
+--- /dev/null
++++ b/firmware/components/catdesk_ui/catdesk_room.c
+@@ -0,0 +1,189 @@
++#include "catdesk_room.h"
++
++#include <stddef.h>
++
++enum {
++    ROOM_LOOP_MS = 300000,
++    WALK_LEG_MS = 5000
++};
++
++static cd_room_pet_pose_t native_pose(const cd_cat_t *cat)
++{
++    cd_room_pet_pose_t pose = {
++        cat->x, cat->y, cat->state, cat->frame, cat->direction,
++        CD_ROOM_ACTIVITY_NONE
++    };
++    return pose;
++}
++
++/* All interpolation distances come from int16 model coordinates or the
++ * fixed room grid, so the multiplication is bounded in a 32-bit int. */
++static int interpolate(int from, int to, uint32_t progress)
++{
++    return from + (to - from) * (int)progress / WALK_LEG_MS;
++}
++
++static int animation_frame(int state, uint32_t elapsed)
++{
++    switch (state) {
++    case CD_CAT_BLINK: return (int)((elapsed / 150u) % 2u);
++    case CD_CAT_WALK: return (int)((elapsed / 120u) % 6u);
++    case CD_CAT_SLEEP: return (int)((elapsed / 500u) % 4u);
++    case CD_CAT_TAP: return (int)((elapsed / 200u) % 6u);
++    default: return (int)((elapsed / 300u) % 4u);
++    }
++}
++
++static cd_room_pet_pose_t activity_target(cd_room_activity_t activity,
++                                          unsigned kind, uint32_t elapsed)
++{
++    cd_room_pet_pose_t target = {0, 170, CD_CAT_IDLE, 0, 1, activity};
++    switch (activity) {
++    case CD_ROOM_ACTIVITY_SOFA:
++        target.x = 77;
++        target.y = 94; /* Sleep silhouette fits the right sofa cushion. */
++        target.state = CD_CAT_SLEEP;
++        target.direction = -1;
++        break;
++    case CD_ROOM_ACTIVITY_BOX:
++        target.x = 56;
++        target.y = 120; /* Head above the opening; front wall masks paws. */
++        target.direction = -1;
++        target.state = elapsed % 6000u < 300u ? CD_CAT_BLINK : CD_CAT_IDLE;
++        break;
++    case CD_ROOM_ACTIVITY_YARN: {
++        /* The existing yarn is x343..350, y216..222. The extended paw
++         * reaches its thread without changing or redrawing the prop. */
++        target.x = 313;
++        target.y = 184;
++        uint32_t play = elapsed % 3000u;
++        target.state = play < 1200u ? CD_CAT_TAP : CD_CAT_IDLE;
++        target.frame = animation_frame(target.state, play);
++        return target;
++    }
++    case CD_ROOM_ACTIVITY_WINDOW:
++        target.x = 54;
++        target.y = 22; /* Paws on y58 sill; weather labels begin at y60. */
++        target.direction = -1;
++        target.state = elapsed % 6000u < 300u ? CD_CAT_BLINK : CD_CAT_IDLE;
++        break;
++    case CD_ROOM_ACTIVITY_MAC:
++        target.x = 268;
++        target.y = 79; /* Paws on desk y115, nose across the Mac display. */
++        target.state = elapsed % 6000u < 300u ? CD_CAT_BLINK : CD_CAT_IDLE;
++        break;
++    case CD_ROOM_ACTIVITY_SNIFF: {
++        uint32_t phase = elapsed % 4000u;
++        int nudge = (int)(phase < 2000u ? phase : 4000u - phase) / 1000;
++        target.x = kind == CD_CAT_ORANGE ? 165 + nudge : 189 - nudge;
++        target.direction = kind == CD_CAT_ORANGE ? 1 : -1;
++        target.state = phase >= 1800u && phase < 2100u
++            ? CD_CAT_BLINK : CD_CAT_IDLE;
++        break;
++    }
++    case CD_ROOM_ACTIVITY_CHASE: {
++        /* Two cats share a bounded eight-second out-and-back lane. On
++         * reversal the trailing cat becomes the leader, with no jump. */
++        uint32_t phase = elapsed % 8000u;
++        uint32_t run = phase < 4000u ? phase : 8000u - phase;
++        int distance = (int)(run * 164u / 4000u);
++        target.x = (kind == CD_CAT_ORANGE ? 128 : 96) + distance;
++        /* Separate the lanes while arriving from native positions, which
++         * may cross after a natural approach. Neither sprite then fully
++         * hides the other during the chase's walk-in or walk-out. */
++        target.y = kind == CD_CAT_ORANGE ? 170 : 178;
++        target.direction = phase < 4000u ? 1 : -1;
++        target.state = CD_CAT_WALK;
++        break;
++    }
++    case CD_ROOM_ACTIVITY_CUDDLE:
++        target.x = kind == CD_CAT_ORANGE ? 166 : 186;
++        target.direction = kind == CD_CAT_ORANGE ? 1 : -1;
++        target.state = CD_CAT_SLEEP;
++        break;
++    default:
++        break;
++    }
++    target.frame = animation_frame(target.state, elapsed);
++    return target;
++}
++
++cd_room_pet_pose_t cd_room_pet_pose(const cd_model_t *model, unsigned kind,
++                                   uint32_t life_ms)
++{
++    if (!model || kind >= CD_CAT_COUNT) {
++        cd_room_pet_pose_t empty = {0, 0, CD_CAT_IDLE, 0, 1,
++                                    CD_ROOM_ACTIVITY_NONE};
++        return empty;
++    }
++    const cd_cat_t *cat = &model->cats[kind];
++    cd_room_pet_pose_t native = native_pose(cat);
++    if (model->celebration_active) return native;
++
++    uint32_t time = life_ms % ROOM_LOOP_MS;
++    cd_room_activity_t activity = CD_ROOM_ACTIVITY_NONE;
++    uint32_t start = 0;
++    uint32_t duration = 30000;
++    if (time >= 30000u && time < 60000u && kind == CD_CAT_ORANGE) {
++        activity = CD_ROOM_ACTIVITY_SOFA;
++        start = 30000;
++    } else if (time >= 60000u && time < 90000u && kind == CD_CAT_BLACK) {
++        activity = CD_ROOM_ACTIVITY_BOX;
++        start = 60000;
++    } else if (time >= 90000u && time < 120000u && kind == CD_CAT_ORANGE) {
++        activity = CD_ROOM_ACTIVITY_YARN;
++        start = 90000;
++    } else if (time >= 120000u && time < 150000u && kind == CD_CAT_BLACK) {
++        activity = CD_ROOM_ACTIVITY_WINDOW;
++        start = 120000;
++    } else if (time >= 150000u && time < 180000u && kind == CD_CAT_ORANGE) {
++        activity = CD_ROOM_ACTIVITY_MAC;
++        start = 150000;
++    } else if (time >= 180000u && time < 210000u) {
++        activity = CD_ROOM_ACTIVITY_SNIFF;
++        start = 180000;
++    } else if (time >= 210000u && time < 250000u) {
++        activity = CD_ROOM_ACTIVITY_CHASE;
++        start = 210000;
++        duration = 40000;
++    } else if (time >= 250000u && time < 290000u) {
++        activity = CD_ROOM_ACTIVITY_CUDDLE;
++        start = 250000;
++        duration = 40000;
++    }
++    if (activity == CD_ROOM_ACTIVITY_NONE) return native;
++
++    uint32_t elapsed = time - start;
++    /* Walk toward a fixed arrival point and leave from a fixed departure
++     * point. Sampling a moving chase/sniff target throughout either walk
++     * would add its motion to the interpolation and cause small jumps. */
++    uint32_t target_elapsed = elapsed;
++    if (elapsed < WALK_LEG_MS) target_elapsed = WALK_LEG_MS;
++    else if (elapsed >= duration - WALK_LEG_MS)
++        target_elapsed = duration - WALK_LEG_MS;
++    cd_room_pet_pose_t target = activity_target(activity, kind, target_elapsed);
++    cd_room_pet_pose_t pose = target;
++    if (elapsed < WALK_LEG_MS) {
++        pose.x = interpolate(native.x, target.x, elapsed);
++        pose.y = interpolate(native.y, target.y, elapsed);
++        pose.direction = target.x >= native.x ? 1 : -1;
++        pose.state = CD_CAT_WALK;
++        pose.frame = animation_frame(CD_CAT_WALK, elapsed);
++    } else if (elapsed >= duration - WALK_LEG_MS) {
++        uint32_t progress = elapsed - (duration - WALK_LEG_MS);
++        pose.x = interpolate(target.x, native.x, progress);
++        pose.y = interpolate(target.y, native.y, progress);
++        pose.direction = native.x >= target.x ? 1 : -1;
++        pose.state = CD_CAT_WALK;
++        pose.frame = animation_frame(CD_CAT_WALK, elapsed);
++    }
++
++    /* Hearts and the black cat's speech bubble remain anchored to the
++     * projected cat. A tap can interrupt any activity without teleporting
++     * back to the rug or replacing its existing reaction animation. */
++    if (cat->state == CD_CAT_TAP || cat->bubble_ms || cat->heart_ms) {
++        pose.state = native.state;
++        pose.frame = native.frame;
++    }
++    return pose;
++}
+diff --git a/firmware/components/catdesk_ui/include/catdesk_room.h b/firmware/components/catdesk_ui/include/catdesk_room.h
+new file mode 100644
+index 0000000..e0eeaf9
+--- /dev/null
++++ b/firmware/components/catdesk_ui/include/catdesk_room.h
+@@ -0,0 +1,43 @@
++#pragma once
++
++#include "catdesk_model.h"
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++typedef enum {
++    CD_ROOM_ACTIVITY_NONE = 0,
++    CD_ROOM_ACTIVITY_SOFA,
++    CD_ROOM_ACTIVITY_BOX,
++    CD_ROOM_ACTIVITY_YARN,
++    CD_ROOM_ACTIVITY_WINDOW,
++    CD_ROOM_ACTIVITY_MAC,
++    CD_ROOM_ACTIVITY_SNIFF,
++    CD_ROOM_ACTIVITY_CHASE,
++    CD_ROOM_ACTIVITY_CUDDLE
++} cd_room_activity_t;
++
++/* Coordinates are the upper-left of the existing 40 x 40 sprite. Paws are
++ * at y + 36. Only the presentation changes; the simulation stays intact. */
++typedef struct {
++    int x;
++    int y;
++    int state;
++    int frame;
++    int direction;
++    cd_room_activity_t activity;
++} cd_room_pet_pose_t;
++
++/* life_ms is monotonic boot time, independent of the host wall clock. The
++ * choreography repeats every 300000 ms. Celebration uses the exact native
++ * pose; ordinary approaches remain projected during room activities and
++ * use their native pose during NONE slots. Petting uses native state/frame
++ * at projected x/y.
++ * This function neither allocates nor changes the model. */
++cd_room_pet_pose_t cd_room_pet_pose(const cd_model_t *model, unsigned kind,
++                                   uint32_t life_ms);
++
++#ifdef __cplusplus
++}
++#endif
+diff --git a/tools/test_room.c b/tools/test_room.c
+new file mode 100644
+index 0000000..8ed0157
+--- /dev/null
++++ b/tools/test_room.c
+@@ -0,0 +1,205 @@
++/* Host check: cc -std=c11 -Wall -Wextra -Werror -pedantic \
++ *   -fsanitize=address,undefined -Ifirmware/components/catdesk_ui/include \
++ *   tools/test_room.c firmware/components/catdesk_ui/catdesk_room.c \
++ *   firmware/components/catdesk_ui/catdesk_model.c -o /tmp/catdesk-test-room
++ */
++#include "catdesk_room.h"
++
++#include <assert.h>
++#include <limits.h>
++#include <stdio.h>
++#include <string.h>
++
++static int distance(int a, int b) { return a > b ? a - b : b - a; }
++
++static void assert_native(cd_room_pet_pose_t pose, const cd_cat_t *cat)
++{
++    assert(pose.activity == CD_ROOM_ACTIVITY_NONE);
++    assert(pose.x == cat->x && pose.y == cat->y);
++    assert(pose.state == (int)cat->state && pose.frame == cat->frame);
++    assert(pose.direction == cat->direction);
++}
++
++static void assert_valid(cd_room_pet_pose_t pose)
++{
++    static const int count[] = {4, 2, 6, 4, 6};
++    assert(pose.x >= 40 && pose.x <= 320);
++    assert(pose.y >= 22 && pose.y <= 184);
++    assert(pose.x + 40 <= 400 && pose.y + 40 <= 240);
++    assert(pose.state >= CD_CAT_IDLE && pose.state <= CD_CAT_TAP);
++    assert(pose.frame >= 0 && pose.frame < count[pose.state]);
++    assert(pose.direction == 1 || pose.direction == -1);
++    assert(pose.activity >= CD_ROOM_ACTIVITY_NONE
++           && pose.activity <= CD_ROOM_ACTIVITY_CUDDLE);
++}
++
++static void test_schedule(cd_model_t *model)
++{
++    static const struct {
++        uint32_t time;
++        unsigned kind;
++        cd_room_activity_t activity;
++        int x, y, state;
++    } fixtures[] = {
++        {45000, CD_CAT_ORANGE, CD_ROOM_ACTIVITY_SOFA, 77, 94, CD_CAT_SLEEP},
++        {75000, CD_CAT_BLACK, CD_ROOM_ACTIVITY_BOX, 56, 120, CD_CAT_IDLE},
++        {105000, CD_CAT_ORANGE, CD_ROOM_ACTIVITY_YARN, 313, 184, CD_CAT_TAP},
++        {135000, CD_CAT_BLACK, CD_ROOM_ACTIVITY_WINDOW, 54, 22, CD_CAT_IDLE},
++        {165000, CD_CAT_ORANGE, CD_ROOM_ACTIVITY_MAC, 268, 79, CD_CAT_IDLE},
++        {195000, CD_CAT_ORANGE, CD_ROOM_ACTIVITY_SNIFF, 166, 170, CD_CAT_IDLE},
++        {195000, CD_CAT_BLACK, CD_ROOM_ACTIVITY_SNIFF, 188, 170, CD_CAT_IDLE},
++        {230000, CD_CAT_ORANGE, CD_ROOM_ACTIVITY_CHASE, 292, 170, CD_CAT_WALK},
++        {230000, CD_CAT_BLACK, CD_ROOM_ACTIVITY_CHASE, 260, 178, CD_CAT_WALK},
++        {270000, CD_CAT_ORANGE, CD_ROOM_ACTIVITY_CUDDLE, 166, 170, CD_CAT_SLEEP},
++        {270000, CD_CAT_BLACK, CD_ROOM_ACTIVITY_CUDDLE, 186, 170, CD_CAT_SLEEP}
++    };
++    for (unsigned i = 0; i < sizeof(fixtures) / sizeof(fixtures[0]); ++i) {
++        cd_room_pet_pose_t pose = cd_room_pet_pose(model, fixtures[i].kind,
++                                                 fixtures[i].time);
++        assert(pose.activity == fixtures[i].activity);
++        assert(pose.x == fixtures[i].x && pose.y == fixtures[i].y);
++        assert(pose.state == fixtures[i].state);
++    }
++    for (unsigned kind = 0; kind < CD_CAT_COUNT; ++kind) {
++        assert_native(cd_room_pet_pose(model, kind, 0), &model->cats[kind]);
++        assert_native(cd_room_pet_pose(model, kind, 29999), &model->cats[kind]);
++        assert_native(cd_room_pet_pose(model, kind, 290000), &model->cats[kind]);
++        assert_native(cd_room_pet_pose(model, kind, 299999), &model->cats[kind]);
++    }
++    assert_native(cd_room_pet_pose(model, CD_CAT_BLACK, 45000), &model->cats[1]);
++    assert_native(cd_room_pet_pose(model, CD_CAT_ORANGE, 75000), &model->cats[0]);
++    assert_native(cd_room_pet_pose(model, CD_CAT_BLACK, 105000), &model->cats[1]);
++    assert_native(cd_room_pet_pose(model, CD_CAT_ORANGE, 135000), &model->cats[0]);
++    assert_native(cd_room_pet_pose(model, CD_CAT_BLACK, 165000), &model->cats[1]);
++}
++
++static void test_paths(const cd_model_t *model)
++{
++    /* Every millisecond of the loop, including the chase reversals and
++     * cross-activity boundaries, moves by at most one presentation pixel.
++     * This checks actual continuity rather than only the slot endpoints. */
++    for (unsigned kind = 0; kind < CD_CAT_COUNT; ++kind) {
++        cd_room_pet_pose_t previous = cd_room_pet_pose(model, kind, 0);
++        for (uint32_t time = 1; time <= 300000u; ++time) {
++            cd_room_pet_pose_t pose = cd_room_pet_pose(model, kind, time);
++            assert_valid(pose);
++            if (distance(previous.x, pose.x) > 1 || distance(previous.y, pose.y) > 1)
++                fprintf(stderr, "Cat %u at %u: (%d,%d) -> (%d,%d)\n",
++                        kind, time, previous.x, previous.y, pose.x, pose.y);
++            assert(distance(previous.x, pose.x) <= 1);
++            assert(distance(previous.y, pose.y) <= 1);
++            previous = pose;
++        }
++    }
++}
++
++static void test_priority(cd_model_t *model)
++{
++    for (unsigned kind = 0; kind < CD_CAT_COUNT; ++kind) {
++        uint32_t time = kind == CD_CAT_ORANGE ? 45000u : 135000u;
++        cd_room_pet_pose_t before = cd_room_pet_pose(model, kind, time);
++        cd_model_t copy = *model;
++        cd_model_tap_cat(&copy, (cd_cat_kind_t)kind);
++        cd_room_pet_pose_t tapped = cd_room_pet_pose(&copy, kind, time);
++        assert(tapped.x == before.x && tapped.y == before.y);
++        assert(tapped.activity == before.activity);
++        assert(tapped.state == CD_CAT_TAP && tapped.frame == 0);
++
++        copy.cats[kind].state = CD_CAT_BLINK;
++        copy.cats[kind].frame = 1;
++        copy.cats[kind].bubble_ms = 1800;
++        cd_room_pet_pose_t bubble = cd_room_pet_pose(&copy, kind, time);
++        assert(bubble.x == before.x && bubble.y == before.y);
++        assert(bubble.state == CD_CAT_BLINK && bubble.frame == 1);
++        copy.cats[kind].bubble_ms = 0;
++        copy.cats[kind].heart_ms = 800;
++        cd_room_pet_pose_t heart = cd_room_pet_pose(&copy, kind, time);
++        assert(heart.x == before.x && heart.y == before.y);
++        assert(heart.state == CD_CAT_BLINK && heart.frame == 1);
++
++        copy.celebration_active = true;
++        assert_native(cd_room_pet_pose(&copy, kind, time), &copy.cats[kind]);
++        copy.celebration_active = false;
++        copy.approach_active = true;
++        cd_room_pet_pose_t approach = cd_room_pet_pose(&copy, kind, time);
++        assert(approach.x == before.x && approach.y == before.y);
++        assert(approach.activity == before.activity);
++        assert_native(cd_room_pet_pose(&copy, kind, 10000), &copy.cats[kind]);
++    }
++}
++
++static void test_live_model(void)
++{
++    cd_model_t model;
++    cd_model_init(&model, 1791216000);
++    cd_room_pet_pose_t previous[CD_CAT_COUNT];
++    for (unsigned kind = 0; kind < CD_CAT_COUNT; ++kind)
++        previous[kind] = cd_room_pet_pose(&model, kind, 0);
++    bool was_approaching = false;
++    unsigned approach_starts = 0, approach_ends = 0;
++    unsigned seen_activities = 0;
++    for (uint32_t time = 50; time <= 300000u; time += 50) {
++        cd_model_tick(&model, 50);
++        assert(!model.celebration_active);
++        if (model.approach_active != was_approaching) {
++            if (model.approach_active) ++approach_starts;
++            else ++approach_ends;
++            was_approaching = model.approach_active;
++        }
++        cd_model_t unchanged = model;
++        for (unsigned kind = 0; kind < CD_CAT_COUNT; ++kind) {
++            cd_room_pet_pose_t pose = cd_room_pet_pose(&model, kind, time);
++            assert_valid(pose);
++            seen_activities |= 1u << pose.activity;
++            if (distance(previous[kind].x, pose.x) > 4
++                || distance(previous[kind].y, pose.y) > 4)
++                fprintf(stderr, "Live cat %u at %u: (%d,%d) -> (%d,%d), approach=%d\n",
++                        kind, time, previous[kind].x, previous[kind].y,
++                        pose.x, pose.y, model.approach_active);
++            assert(distance(previous[kind].x, pose.x) <= 4);
++            assert(distance(previous[kind].y, pose.y) <= 4);
++            previous[kind] = pose;
++        }
++        assert(memcmp(&model, &unchanged, sizeof(model)) == 0);
++    }
++    /* The original simulation ran its natural approach repeatedly, while
++     * every furniture/pair slot remained visible and paths stayed smooth. */
++    assert(approach_starts >= 4 && approach_ends >= 4);
++    assert(seen_activities == (1u << (CD_ROOM_ACTIVITY_CUDDLE + 1u)) - 1u);
++}
++
++static void test_pure_and_long_time(cd_model_t *model)
++{
++    cd_model_t original = *model;
++    const uint32_t times[] = {300000, 600000, UINT32_MAX, UINT32_MAX - 1u,
++                              1000000000u, 4294800000u};
++    for (unsigned i = 0; i < sizeof(times) / sizeof(times[0]); ++i) {
++        for (unsigned kind = 0; kind < CD_CAT_COUNT; ++kind) {
++            cd_room_pet_pose_t actual = cd_room_pet_pose(model, kind, times[i]);
++            cd_room_pet_pose_t wrapped = cd_room_pet_pose(model, kind,
++                                                         times[i] % 300000u);
++            assert(actual.x == wrapped.x && actual.y == wrapped.y);
++            assert(actual.state == wrapped.state && actual.frame == wrapped.frame);
++            assert(actual.direction == wrapped.direction);
++            assert(actual.activity == wrapped.activity);
++            assert_valid(actual);
++        }
++    }
++    assert(memcmp(model, &original, sizeof(original)) == 0);
++    assert(cd_room_pet_pose(NULL, 0, UINT32_MAX).activity == CD_ROOM_ACTIVITY_NONE);
++    assert(cd_room_pet_pose(model, CD_CAT_COUNT, UINT32_MAX).activity == CD_ROOM_ACTIVITY_NONE);
++}
++
++int main(void)
++{
++    cd_model_t model;
++    cd_model_init(&model, 1791216000); /* October 6; anniversary not running. */
++    assert(!model.celebration_active && !model.approach_active);
++    test_schedule(&model);
++    test_paths(&model);
++    test_priority(&model);
++    test_live_model();
++    test_pure_and_long_time(&model);
++    puts("CatDesk room: paths, bounds, reactions, celebration and pure wrapping passed.");
++    return 0;
++}
+diff --git a/tools/test_room_integration.py b/tools/test_room_integration.py
+new file mode 100644
+index 0000000..0f9604e
+--- /dev/null
++++ b/tools/test_room_integration.py
+@@ -0,0 +1,381 @@
++#!/usr/bin/env python3
++"""Check the candidate room through its actual renderer and touch routing.
++
++Compiles a temporary host driver with ASan/UBSan. No serial devices, Helper,
++ESP-IDF build directories, release binaries, or installed services are used.
++"""
++
++import argparse
++from pathlib import Path
++import subprocess
++import tempfile
++
++
++DRIVER = r'''
++#include "catdesk_render.h"
++#include "catdesk_room.h"
++#include "catdesk_cats.h"
++#include "catdesk_layout.h"
++#include <assert.h>
++#include <inttypes.h>
++#include <stdbool.h>
++#include <stdint.h>
++#include <stdio.h>
++#include <string.h>
++
++enum { LIFE_CYCLE = 300000, PIXELS = CD_WIDTH * CD_HEIGHT };
++static uint16_t background[PIXELS], frame[PIXELS], sprite[PIXELS], saved[PIXELS];
++static unsigned rendered, touch_checks, prop_checks;
++static const int64_t OCT_6 = INT64_C(1791216000);
++static const int64_t OCT_7 = INT64_C(1791302400);
++
++static void life_at(uint32_t desired)
++{
++    desired %= LIFE_CYCLE;
++    const uint32_t current = cd_ui_life_ms();
++    assert(current < LIFE_CYCLE);
++    cd_ui_visual_tick((desired + LIFE_CYCLE - current) % LIFE_CYCLE);
++    assert(cd_ui_life_ms() == desired);
++}
++
++static uint64_t hash_region(const uint16_t *pixels, int x, int y, int w, int h)
++{
++    uint64_t hash = UINT64_C(1469598103934665603);
++    assert(x >= 0 && y >= 0 && x + w <= CD_WIDTH && y + h <= CD_HEIGHT);
++    for (int row = y; row < y + h; ++row)
++        for (int col = x; col < x + w; ++col) {
++            hash ^= pixels[row * CD_WIDTH + col];
++            hash *= UINT64_C(1099511628211);
++        }
++    return hash;
++}
++
++static void render_pure(const cd_model_t *model)
++{
++    unsigned char previous[sizeof(*model)];
++    memcpy(previous, model, sizeof(*model));
++    const uint64_t bg_hash = hash_region(background, 0, 0, CD_WIDTH, CD_HEIGHT);
++    cd_render_frame(frame, background, model);
++    assert(memcmp(previous, model, sizeof(*model)) == 0);
++    assert(hash_region(background, 0, 0, CD_WIDTH, CD_HEIGHT) == bg_hash);
++    ++rendered;
++}
++
++static cd_room_pet_pose_t pose_pure(const cd_model_t *model, unsigned kind)
++{
++    unsigned char previous[sizeof(*model)];
++    memcpy(previous, model, sizeof(*model));
++    cd_room_pet_pose_t pose = cd_room_pet_pose(model, kind, cd_ui_life_ms());
++    assert(memcmp(previous, model, sizeof(*model)) == 0);
++    assert(pose.x >= 0 && pose.x + CD_CAT_WIDTH <= CD_WIDTH);
++    assert(pose.y >= 0 && pose.y + CD_CAT_HEIGHT <= CD_HEIGHT);
++    assert(pose.state >= CD_CAT_IDLE && pose.state <= CD_CAT_TAP);
++    static const unsigned lengths[] = {4, 2, 6, 4, 6};
++    assert(pose.frame >= 0 && (unsigned)pose.frame < lengths[pose.state]);
++    assert(pose.direction == -1 || pose.direction == 1);
++    assert(pose.activity >= CD_ROOM_ACTIVITY_NONE && pose.activity <= CD_ROOM_ACTIVITY_CUDDLE);
++    return pose;
++}
++
++static bool same_pose(cd_room_pet_pose_t a, cd_room_pet_pose_t b)
++{
++    return a.x == b.x && a.y == b.y && a.state == b.state && a.frame == b.frame
++        && a.direction == b.direction && a.activity == b.activity;
++}
++
++static void draw_pose(cd_room_pet_pose_t pose, unsigned kind)
++{
++    memset(sprite, 0, sizeof(sprite));
++    int jump = 0;
++    if (kind == CD_CAT_ORANGE && pose.state == CD_CAT_TAP) {
++        const int jumps[] = {0, 0, 8, 13, 6, 0};
++        jump = jumps[pose.frame % 6];
++    }
++    catdesk_draw_cat(sprite, CD_WIDTH, pose.x, pose.y - jump, (int)kind,
++                     pose.state, pose.frame, pose.direction < 0);
++}
++
++static unsigned visible_sprite_pixels(cd_room_pet_pose_t pose, unsigned kind)
++{
++    draw_pose(pose, kind);
++    unsigned visible = 0;
++    for (unsigned i = 0; i < PIXELS; ++i)
++        if (sprite[i] && sprite[i] == frame[i]) ++visible;
++    /* A cat partially inside the box may have its lower body occluded. */
++    if (visible < 24) {
++        fprintf(stderr, "Invisible projected cat: life=%" PRIu32 " kind=%u activity=%d x=%d y=%d state=%d frame=%d matched=%u\n",
++                cd_ui_life_ms(), kind, pose.activity, pose.x, pose.y, pose.state, pose.frame, visible);
++        assert(visible >= 24);
++    }
++    return visible;
++}
++
++static void test_periods(void)
++{
++    cd_model_t model;
++    cd_model_init(&model, OCT_6);
++    life_at(0);
++    uint64_t sky[3], lamp[3];
++    const unsigned hours[] = {12, 18, 23};
++    const cd_room_period_t periods[] = {CD_ROOM_DAY, CD_ROOM_DUSK, CD_ROOM_NIGHT};
++    for (unsigned i = 0; i < 3; ++i) {
++        cd_model_set_time(&model, OCT_6 + hours[i] * 3600);
++        model.clock_synced = true;
++        assert(cd_room_period(&model) == periods[i]);
++        render_pure(&model);
++        sky[i] = hash_region(frame, CD_WINDOW_X + 5, CD_WINDOW_Y + 5, 46, 24);
++        lamp[i] = hash_region(frame, 110, 108, 36, 44);
++    }
++    assert(sky[0] != sky[1] && sky[1] != sky[2] && sky[0] != sky[2]);
++    assert(lamp[0] != lamp[1] && lamp[0] != lamp[2]);
++    for (unsigned hour = 0; hour < 24; ++hour) {
++        cd_model_set_time(&model, OCT_6 + hour * 3600);
++        model.clock_synced = true;
++        const cd_room_period_t expected = hour >= 6 && hour <= 16 ? CD_ROOM_DAY
++            : hour >= 17 && hour <= 19 ? CD_ROOM_DUSK : CD_ROOM_NIGHT;
++        assert(cd_room_period(&model) == expected);
++        render_pure(&model);
++        model.clock_synced = false;
++        assert(cd_room_period(&model) == CD_ROOM_DUSK);
++        render_pure(&model);
++        assert(hash_region(frame, CD_WINDOW_X + 5, CD_WINDOW_Y + 5, 46, 24) == sky[1]);
++    }
++    const unsigned transitions[] = {6, 17, 20};
++    for (unsigned i = 0; i < 3; ++i) {
++        cd_model_set_time(&model, OCT_6 + transitions[i] * 3600 - 1);
++        model.clock_synced = true;
++        const cd_room_period_t before = cd_room_period(&model);
++        render_pure(&model);
++        cd_model_tick(&model, 1000);
++        assert(cd_room_period(&model) != before);
++        render_pure(&model);
++    }
++}
++
++static void test_five_minute_renderer(void)
++{
++    cd_model_t model;
++    cd_model_init(&model, OCT_6 + 12 * 3600);
++    model.clock_synced = true;
++    unsigned seen = 0, elevated = 0;
++    uint64_t first = 0;
++    bool changed = false;
++    for (uint32_t ms = 0; ms <= LIFE_CYCLE; ms += 250) {
++        life_at(ms);
++        render_pure(&model);
++        const uint64_t current = hash_region(frame, 0, 0, CD_WIDTH, CD_HEIGHT);
++        if (ms == 0) first = current;
++        else if (current != first) changed = true;
++        for (unsigned kind = 0; kind < CD_CAT_COUNT; ++kind) {
++            const cd_room_pet_pose_t pose = pose_pure(&model, kind);
++            seen |= 1u << pose.activity;
++            if (pose.y < model.cats[kind].y) ++elevated;
++            (void)visible_sprite_pixels(pose, kind);
++            const cd_room_pet_pose_t wrapped = cd_room_pet_pose(&model, kind, ms + LIFE_CYCLE);
++            assert(same_pose(pose, wrapped));
++        }
++    }
++    assert(changed && elevated > 100);
++    assert(seen == (1u << (CD_ROOM_ACTIVITY_CUDDLE + 1)) - 1u);
++    /* Rendering one complete loop cannot alter date, cats, timers, or data. */
++    assert(model.epoch_utc == OCT_6 + 12 * 3600 && model.popup == CD_POPUP_NONE);
++    assert(model.cats[0].x == 112 && model.cats[1].x == 248);
++}
++
++static void test_visible_taps(const cd_model_t *model, unsigned kind)
++{
++    const cd_room_pet_pose_t before = pose_pure(model, kind);
++    draw_pose(before, kind);
++    cd_model_t expected = *model;
++    cd_model_tap_cat(&expected, (cd_cat_kind_t)kind);
++    for (int y = before.y; y < before.y + CD_CAT_HEIGHT; ++y)
++        for (int x = before.x; x < before.x + CD_CAT_WIDTH; ++x) {
++            const unsigned index = (unsigned)y * CD_WIDTH + (unsigned)x;
++            if (!sprite[index] || sprite[index] != frame[index]) continue;
++            cd_model_t tapped = *model;
++            cd_ui_press(&tapped, x, y);
++            if (memcmp(&tapped, &expected, sizeof(tapped)) != 0) continue;
++            const cd_room_pet_pose_t reaction = pose_pure(&tapped, kind);
++            assert(reaction.x == before.x && reaction.y == before.y);
++            assert(reaction.state == CD_CAT_TAP && reaction.frame == 0);
++            render_pure(&tapped);
++            (void)visible_sprite_pixels(reaction, kind);
++            ++touch_checks;
++            return;
++        }
++    fprintf(stderr, "No visible touch route: life=%" PRIu32 " kind=%u activity=%d x=%d y=%d\n",
++            cd_ui_life_ms(), kind, before.activity, before.x, before.y);
++    assert(false);
++}
++
++static bool visible_cat_at(const cd_model_t *model, int x, int y)
++{
++    const unsigned index = (unsigned)y * CD_WIDTH + (unsigned)x;
++    for (unsigned kind = 0; kind < CD_CAT_COUNT; ++kind) {
++        draw_pose(pose_pure(model, kind), kind);
++        if (sprite[index] && sprite[index] == frame[index]) return true;
++    }
++    return false;
++}
++
++static void test_prop_access(const cd_model_t *model, cd_popup_t popup,
++                             int left, int top, int width, int height)
++{
++    for (int y = top; y < top + height; ++y)
++        for (int x = left; x < left + width; ++x) {
++            if (visible_cat_at(model, x, y)) continue;
++            cd_model_t pressed = *model;
++            cd_ui_press(&pressed, x, y);
++            if (pressed.popup == popup) {
++                /* Opening furniture changes only the popup, not core cats. */
++                pressed.popup = model->popup;
++                assert(memcmp(&pressed, model, sizeof(pressed)) == 0);
++                ++prop_checks;
++                return;
++            }
++        }
++    fprintf(stderr, "Prop inaccessible outside cat: life=%" PRIu32 " popup=%d\n",
++            cd_ui_life_ms(), popup);
++    assert(false);
++}
++
++static void test_projected_input(void)
++{
++    cd_model_t model;
++    cd_model_init(&model, OCT_6 + 12 * 3600);
++    model.clock_synced = true;
++    for (uint32_t ms = 0; ms < LIFE_CYCLE; ms += 5000) {
++        life_at(ms);
++        for (unsigned kind = 0; kind < CD_CAT_COUNT; ++kind) {
++            render_pure(&model);
++            test_visible_taps(&model, kind);
++        }
++        render_pure(&model);
++        test_prop_access(&model, CD_POPUP_MAC, CD_MAC_X, CD_MAC_Y, CD_MAC_W, CD_MAC_H);
++        test_prop_access(&model, CD_POPUP_WEATHER, CD_WINDOW_X, CD_WINDOW_Y, CD_WINDOW_W, CD_WINDOW_H);
++        test_prop_access(&model, CD_POPUP_TODO, CD_BOOK_X, CD_BOOK_Y, CD_BOOK_W, CD_BOOK_H);
++        test_prop_access(&model, CD_POPUP_FOCUS, CD_TOMATO_X, CD_TOMATO_Y, CD_TOMATO_W, CD_TOMATO_H);
++        test_prop_access(&model, CD_POPUP_ANNIVERSARY, CD_FRAME_X, CD_FRAME_Y, CD_FRAME_W, CD_FRAME_H);
++        test_prop_access(&model, CD_POPUP_SETTINGS, CD_GEAR_X, CD_GEAR_Y, 13, 13);
++    }
++}
++
++static void test_running_model(void)
++{
++    cd_model_t model;
++    cd_model_init(&model, OCT_6 + 12 * 3600);
++    model.clock_synced = true;
++    life_at(0);
++    unsigned activity_seen = 0, native_approaches = 0;
++    for (unsigned step = 0; step < LIFE_CYCLE / 250; ++step) {
++        cd_model_tick(&model, 250);
++        cd_ui_visual_tick(250);
++        render_pure(&model);
++        if (model.approach_active) ++native_approaches;
++        for (unsigned kind = 0; kind < CD_CAT_COUNT; ++kind) {
++            const cd_room_pet_pose_t pose = pose_pure(&model, kind);
++            activity_seen |= 1u << pose.activity;
++            (void)visible_sprite_pixels(pose, kind);
++            if (model.approach_active && pose.activity == CD_ROOM_ACTIVITY_NONE) {
++                assert(pose.x == model.cats[kind].x && pose.y == model.cats[kind].y);
++            }
++        }
++    }
++    assert(model.epoch_utc == OCT_6 + 12 * 3600 + 300);
++    assert(cd_ui_life_ms() == 0 && native_approaches > 0);
++    assert(activity_seen == (1u << (CD_ROOM_ACTIVITY_CUDDLE + 1)) - 1u);
++}
++
++static void test_celebration_priority(void)
++{
++    cd_model_t model;
++    cd_model_init(&model, OCT_7);
++    model.clock_synced = true;
++    for (unsigned phase = 0; phase < 2; ++phase) {
++        if (phase == 1) {
++            cd_model_tick(&model, 3000);
++            assert(model.celebration_phase == CD_CELEBRATION_HEARTS);
++        }
++        assert(model.celebration_active);
++        life_at(0);
++        render_pure(&model);
++        memcpy(saved, frame, sizeof(saved));
++        for (uint32_t ms = 0; ms < LIFE_CYCLE; ms += 3000) {
++            life_at(ms);
++            render_pure(&model);
++            assert(memcmp(saved, frame, sizeof(saved)) == 0);
++            for (unsigned kind = 0; kind < CD_CAT_COUNT; ++kind) {
++                const cd_room_pet_pose_t pose = pose_pure(&model, kind);
++                const cd_cat_t *native = &model.cats[kind];
++                assert(pose.x == native->x && pose.y == native->y);
++                assert(pose.state == (int)native->state && pose.frame == native->frame);
++                assert(pose.direction == native->direction && pose.activity == CD_ROOM_ACTIVITY_NONE);
++            }
++        }
++    }
++}
++
++static void test_monotonic_clock(void)
++{
++    cd_model_t model;
++    cd_model_init(&model, OCT_6 + 12 * 3600);
++    life_at(90001);
++    const uint32_t life = cd_ui_life_ms();
++    const cd_room_pet_pose_t poses[] = {pose_pure(&model, 0), pose_pure(&model, 1)};
++    for (unsigned hour = 0; hour < 24; ++hour) {
++        cd_model_set_time(&model, OCT_6 + hour * 3600);
++        assert(cd_ui_life_ms() == life);
++        for (unsigned kind = 0; kind < CD_CAT_COUNT; ++kind)
++            assert(same_pose(poses[kind], pose_pure(&model, kind)));
++    }
++    const uint32_t deltas[] = {4000, 200000, UINT32_MAX};
++    for (unsigned i = 0; i < sizeof(deltas) / sizeof(deltas[0]); ++i) {
++        const uint32_t previous = cd_ui_life_ms();
++        cd_ui_visual_tick(deltas[i]);
++        assert(cd_ui_life_ms() == ((uint64_t)previous + deltas[i]) % LIFE_CYCLE);
++    }
++}
++
++int main(void)
++{
++    cd_render_background(background);
++    cd_ui_pointer(-100, -100, false);
++    test_periods();
++    test_five_minute_renderer();
++    test_projected_input();
++    test_running_model();
++    test_celebration_priority();
++    test_monotonic_clock();
++    printf("CatDesk room integration: %u real frames, 300-second choreography, all24 synced/unsynced hours, projected cats visible/tappable (%u), all6 props accessible (%u), immutable model/background, anniversary priority and monotonic clock PASS.\n",
++           rendered, touch_checks, prop_checks);
++    return 0;
++}
++'''
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--cc", default="clang")
++    args = parser.parse_args()
++    root = Path(__file__).resolve().parent.parent
++    component = root / "firmware/components/catdesk_ui"
++    with tempfile.TemporaryDirectory(prefix="catdesk-room-integration-") as directory:
++        work = Path(directory)
++        source = work / "room_integration.c"
++        binary = work / "room_integration"
++        source.write_text(DRIVER)
++        command = [
++            args.cc, "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror", "-pedantic",
++            "-fsanitize=address,undefined", "-fno-omit-frame-pointer", "-g",
++            "-I" + str(component / "include"), str(source),
++            *(str(component / name) for name in (
++                "catdesk_model.c", "catdesk_room.c", "catdesk_render.c",
++                "catdesk_cats.c", "catdesk_font.c", "pixel_ui.c",
++            )), "-o", str(binary),
++        ]
++        subprocess.run(command, check=True)
++        subprocess.run([str(binary)], check=True)
++
++
++if __name__ == "__main__":
++    main()

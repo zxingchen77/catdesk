@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-06",
+  "status": "candidate_not_flashed",
+  "baseline_commit": "9e8bd4e299af110c9bf7ca95a1d83f6f4251df6c",
+  "firmware": {
+    "file": "catdesk-room-candidate.bin",
+    "bytes": 773312,
+    "sha256": "baed4b7023c976c8ef655d050774a2f94e2b5fd7797e4ae246245bb0628cc706",
+    "partition_bytes": 1048576,
+    "partition_free_bytes": 275264,
+    "flash_offset": "0x10000",
+    "esp_idf": "5.5.5"
+  },
+  "rollback": {
+    "file": "releases/catdesk-gift-2026-10-07.bin",
+    "bytes": 770288,
+    "sha256": "7fa5d8afb0d4e77bbc5fba6350a93d54ed8c20c82bfa05eeafa273b6d612eb7f",
+    "hardware_running_version": "rollback baseline; candidate was not flashed"
+  },
+  "source": {
+    "patch": "source.patch",
+    "sha256": "50f054a64ba59273ff2905d53c520795679f6ed789618237996f0c042edebb4b",
+    "restore_from_baseline_verified": true
+  },
+  "features": {
+    "periods": {
+      "day": "06:00-16:59",
+      "dusk": "17:00-19:59",
+      "night": "20:00-05:59",
+      "timezone": "Asia/Shanghai",
+      "before_host_time_sync": "dusk"
+    },
+    "room_life_loop_ms": 300000,
+    "activities": [
+      "sofa sleep",
+      "cardboard box",
+      "yarn",
+      "windowsill",
+      "Mac blocking",
+      "sniff",
+      "chase",
+      "sleep together"
+    ]
+  },
+  "validation": {
+    "all_host_checks_pass": true,
+    "ui_frames": 7495,
+    "presenter_frames": 14849,
+    "invalidations": 16908,
+    "room_integration_frames": 2960,
+    "projected_cat_taps": 120,
+    "prop_access_checks": 360,
+    "original_protected_files": 16,
+    "rgb565_mapping_values_checked": 65536,
+    "preview_pixel_equivalence": "preview-pixel-equivalence.json",
+    "real_device_candidate_validation": false
+  },
+  "remaining_acceptance": [
+    "1-2 hour real device stability including night rendering",
+    "manual touch and brightness",
+    "physical USB disconnect/reconnect",
+    "power cycle persistence and time synchronization",
+    "October 7 anniversary after actual Helper sync"
+  ]
+}

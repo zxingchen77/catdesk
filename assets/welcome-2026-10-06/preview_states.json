@@ -1,0 +1,5361 @@
+{
+  "description": "Actual firmware welcome and home renderer software previews, not LCD photographs.",
+  "logical_size": [
+    400,
+    240
+  ],
+  "output_size": [
+    800,
+    480
+  ],
+  "scale": "nearest-neighbor 2x",
+  "sample_ms": 100,
+  "touch_ms": 5600,
+  "brightness_percent": 85,
+  "source_sha256": {
+    "tools/render_welcome_preview.c": "e993c113cac59fd9f585882b40aea50b69076becdbc26a9e5d7aa24a8681a25c",
+    "firmware/components/catdesk_ui/catdesk_welcome.c": "037a1cf41e03db5e31afd07eca9dcad15b139071aa1598cf95f220ed94b8beb1",
+    "firmware/components/catdesk_ui/catdesk_model.c": "779ee029bd304412316a94cdd47b2be44e2d490898e4d56b28e45d526d58d888",
+    "firmware/components/catdesk_ui/catdesk_render.c": "df1c85cc52e600f2e89b0bd03e69254b45cbd3263edc12c5e64145224a8ae7b3",
+    "firmware/components/catdesk_ui/catdesk_room.c": "1142bc0fd8904d287e2b85c757b3ce2532b9507ee534f6adb354375f46f0eac1",
+    "firmware/components/catdesk_ui/catdesk_font.c": "316f8e0b54735d08e27f50b07376b84e78fa5dcb514e55cd99bb5c8763d29ad8",
+    "firmware/components/catdesk_ui/catdesk_cats.c": "220b94787627a722f6228c0d4c28dddfd1fb0f586a38469484cdd0ce493eb275",
+    "firmware/components/catdesk_ui/pixel_ui.c": "41afe46291a3b37c5ad71fdfb5e50cd8ae20e54d93a016f9821116af83363a58"
+  },
+  "snapshots": {
+    "welcome_night_preview.png": {
+      "date": "2026-10-06",
+      "elapsed_ms": 0,
+      "scene_ms": 0,
+      "exit_ms": 0,
+      "phase": "intro",
+      "active": true,
+      "anniversary": false,
+      "touch_ms": 120001,
+      "touch_accepted": false,
+      "press_latched": false,
+      "orange": {
+        "x": 145,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": false
+      },
+      "black": {
+        "x": 215,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": -1,
+        "visible": false
+      }
+    },
+    "welcome_waiting_preview.png": {
+      "date": "2026-10-06",
+      "elapsed_ms": 4000,
+      "scene_ms": 4000,
+      "exit_ms": 0,
+      "phase": "waiting",
+      "active": true,
+      "anniversary": false,
+      "touch_ms": 120001,
+      "touch_accepted": false,
+      "press_latched": false,
+      "orange": {
+        "x": 145,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": true
+      },
+      "black": {
+        "x": 215,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": -1,
+        "visible": true
+      }
+    },
+    "welcome_waiting_dim_preview.png": {
+      "date": "2026-10-06",
+      "elapsed_ms": 5000,
+      "scene_ms": 5000,
+      "exit_ms": 0,
+      "phase": "waiting",
+      "active": true,
+      "anniversary": false,
+      "touch_ms": 120001,
+      "touch_accepted": false,
+      "press_latched": false,
+      "orange": {
+        "x": 145,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": true
+      },
+      "black": {
+        "x": 215,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": -1,
+        "visible": true
+      }
+    },
+    "welcome_anniversary_preview.png": {
+      "date": "2026-10-07",
+      "elapsed_ms": 4000,
+      "scene_ms": 4000,
+      "exit_ms": 0,
+      "phase": "waiting",
+      "active": true,
+      "anniversary": true,
+      "touch_ms": 120001,
+      "touch_accepted": false,
+      "press_latched": false,
+      "orange": {
+        "x": 145,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": true
+      },
+      "black": {
+        "x": 215,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": -1,
+        "visible": true
+      }
+    },
+    "welcome_doorway_preview.png": {
+      "date": "2026-10-06",
+      "elapsed_ms": 6400,
+      "scene_ms": 5600,
+      "exit_ms": 800,
+      "phase": "entering",
+      "active": true,
+      "anniversary": false,
+      "touch_ms": 5600,
+      "touch_accepted": true,
+      "press_latched": true,
+      "orange": {
+        "x": 166,
+        "y": 129,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": false
+      },
+      "black": {
+        "x": 194,
+        "y": 129,
+        "state": 0,
+        "frame": 0,
+        "direction": -1,
+        "visible": false
+      }
+    },
+    "welcome_wipe_preview.png": {
+      "date": "2026-10-06",
+      "elapsed_ms": 6900,
+      "scene_ms": 5600,
+      "exit_ms": 1300,
+      "phase": "wiping",
+      "active": true,
+      "anniversary": false,
+      "touch_ms": 5600,
+      "touch_accepted": true,
+      "press_latched": true,
+      "orange": {
+        "x": 166,
+        "y": 129,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": false
+      },
+      "black": {
+        "x": 194,
+        "y": 129,
+        "state": 0,
+        "frame": 0,
+        "direction": -1,
+        "visible": false
+      }
+    },
+    "welcome_home_preview.png": {
+      "date": "2026-10-06",
+      "elapsed_ms": 7400,
+      "scene_ms": 5600,
+      "exit_ms": 1700,
+      "phase": "done",
+      "active": false,
+      "anniversary": false,
+      "touch_ms": 5600,
+      "touch_accepted": true,
+      "press_latched": true,
+      "orange": {
+        "x": 0,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": false
+      },
+      "black": {
+        "x": 0,
+        "y": 164,
+        "state": 0,
+        "frame": 0,
+        "direction": 1,
+        "visible": false
+      }
+    }
+  },
+  "animations": {
+    "welcome_normal_preview.gif": {
+      "sample_count": 86,
+      "duration_ms": 8600,
+      "states": [
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 0,
+          "scene_ms": 0,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 100,
+          "scene_ms": 100,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 200,
+          "scene_ms": 200,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 300,
+          "scene_ms": 300,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 400,
+          "scene_ms": 400,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 500,
+          "scene_ms": 500,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 600,
+          "scene_ms": 600,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 700,
+          "scene_ms": 700,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 800,
+          "scene_ms": 800,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 900,
+          "scene_ms": 900,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 1000,
+          "scene_ms": 1000,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 1100,
+          "scene_ms": 1100,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 1200,
+          "scene_ms": 1200,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 1300,
+          "scene_ms": 1300,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 1400,
+          "scene_ms": 1400,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 1500,
+          "scene_ms": 1500,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": -40,
+            "y": 164,
+            "state": 2,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 1600,
+          "scene_ms": 1600,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": -24,
+            "y": 164,
+            "state": 2,
+            "frame": 1,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 1700,
+          "scene_ms": 1700,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": -7,
+            "y": 164,
+            "state": 2,
+            "frame": 2,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 400,
+            "y": 164,
+            "state": 2,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 1800,
+          "scene_ms": 1800,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 10,
+            "y": 164,
+            "state": 2,
+            "frame": 3,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 384,
+            "y": 164,
+            "state": 2,
+            "frame": 1,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 1900,
+          "scene_ms": 1900,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 27,
+            "y": 164,
+            "state": 2,
+            "frame": 4,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 367,
+            "y": 164,
+            "state": 2,
+            "frame": 2,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 2000,
+          "scene_ms": 2000,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 44,
+            "y": 164,
+            "state": 2,
+            "frame": 5,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 350,
+            "y": 164,
+            "state": 2,
+            "frame": 3,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 2100,
+          "scene_ms": 2100,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 60,
+            "y": 164,
+            "state": 2,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 333,
+            "y": 164,
+            "state": 2,
+            "frame": 4,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 2200,
+          "scene_ms": 2200,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 77,
+            "y": 164,
+            "state": 2,
+            "frame": 1,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 316,
+            "y": 164,
+            "state": 2,
+            "frame": 5,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 2300,
+          "scene_ms": 2300,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 94,
+            "y": 164,
+            "state": 2,
+            "frame": 2,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 300,
+            "y": 164,
+            "state": 2,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 2400,
+          "scene_ms": 2400,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 111,
+            "y": 164,
+            "state": 2,
+            "frame": 3,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 283,
+            "y": 164,
+            "state": 2,
+            "frame": 1,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 2500,
+          "scene_ms": 2500,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 128,
+            "y": 164,
+            "state": 2,
+            "frame": 4,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 266,
+            "y": 164,
+            "state": 2,
+            "frame": 2,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 2600,
+          "scene_ms": 2600,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 249,
+            "y": 164,
+            "state": 2,
+            "frame": 3,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 2700,
+          "scene_ms": 2700,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 232,
+            "y": 164,
+            "state": 2,
+            "frame": 4,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 2800,
+          "scene_ms": 2800,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 1,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 1,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 2900,
+          "scene_ms": 2900,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 1,
+            "frame": 1,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 1,
+            "frame": 1,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 3000,
+          "scene_ms": 3000,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 1,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 1,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 3100,
+          "scene_ms": 3100,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 3,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 3,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 3200,
+          "scene_ms": 3200,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 3300,
+          "scene_ms": 3300,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 3400,
+          "scene_ms": 3400,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 3500,
+          "scene_ms": 3500,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 3600,
+          "scene_ms": 3600,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 3700,
+          "scene_ms": 3700,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 3800,
+          "scene_ms": 3800,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 3900,
+          "scene_ms": 3900,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 4000,
+          "scene_ms": 4000,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 4100,
+          "scene_ms": 4100,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 4200,
+          "scene_ms": 4200,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 4300,
+          "scene_ms": 4300,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 4400,
+          "scene_ms": 4400,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 4500,
+          "scene_ms": 4500,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 4600,
+          "scene_ms": 4600,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 4700,
+          "scene_ms": 4700,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 4800,
+          "scene_ms": 4800,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 4900,
+          "scene_ms": 4900,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 5000,
+          "scene_ms": 5000,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 5100,
+          "scene_ms": 5100,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 5200,
+          "scene_ms": 5200,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 5300,
+          "scene_ms": 5300,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 5400,
+          "scene_ms": 5400,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 5500,
+          "scene_ms": 5500,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 5600,
+          "scene_ms": 5600,
+          "exit_ms": 0,
+          "phase": "entering",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 2,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 2,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 5700,
+          "scene_ms": 5600,
+          "exit_ms": 100,
+          "phase": "entering",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 148,
+            "y": 159,
+            "state": 2,
+            "frame": 1,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 212,
+            "y": 159,
+            "state": 2,
+            "frame": 1,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 5800,
+          "scene_ms": 5600,
+          "exit_ms": 200,
+          "phase": "entering",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 152,
+            "y": 153,
+            "state": 2,
+            "frame": 2,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 208,
+            "y": 153,
+            "state": 2,
+            "frame": 2,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 5900,
+          "scene_ms": 5600,
+          "exit_ms": 300,
+          "phase": "entering",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 155,
+            "y": 147,
+            "state": 2,
+            "frame": 3,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 205,
+            "y": 147,
+            "state": 2,
+            "frame": 3,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 6000,
+          "scene_ms": 5600,
+          "exit_ms": 400,
+          "phase": "entering",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 159,
+            "y": 141,
+            "state": 2,
+            "frame": 4,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 201,
+            "y": 141,
+            "state": 2,
+            "frame": 4,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 6100,
+          "scene_ms": 5600,
+          "exit_ms": 500,
+          "phase": "entering",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 162,
+            "y": 135,
+            "state": 2,
+            "frame": 5,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 198,
+            "y": 135,
+            "state": 2,
+            "frame": 5,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 6200,
+          "scene_ms": 5600,
+          "exit_ms": 600,
+          "phase": "entering",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 6300,
+          "scene_ms": 5600,
+          "exit_ms": 700,
+          "phase": "entering",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 6400,
+          "scene_ms": 5600,
+          "exit_ms": 800,
+          "phase": "entering",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 6500,
+          "scene_ms": 5600,
+          "exit_ms": 900,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 6600,
+          "scene_ms": 5600,
+          "exit_ms": 1000,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 6700,
+          "scene_ms": 5600,
+          "exit_ms": 1100,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 6800,
+          "scene_ms": 5600,
+          "exit_ms": 1200,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 6900,
+          "scene_ms": 5600,
+          "exit_ms": 1300,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 7000,
+          "scene_ms": 5600,
+          "exit_ms": 1400,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 7100,
+          "scene_ms": 5600,
+          "exit_ms": 1500,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 7200,
+          "scene_ms": 5600,
+          "exit_ms": 1600,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 7300,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 7400,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 7500,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 7600,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 7700,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 7800,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 7900,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 8000,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 8100,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 8200,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 8300,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 8400,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-06",
+          "elapsed_ms": 8500,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": false,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        }
+      ],
+      "exact_palette_and_pixels_verified": true
+    },
+    "welcome_anniversary_preview.gif": {
+      "sample_count": 86,
+      "duration_ms": 8600,
+      "states": [
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 0,
+          "scene_ms": 0,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 100,
+          "scene_ms": 100,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 200,
+          "scene_ms": 200,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 300,
+          "scene_ms": 300,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 400,
+          "scene_ms": 400,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 500,
+          "scene_ms": 500,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 600,
+          "scene_ms": 600,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 700,
+          "scene_ms": 700,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 800,
+          "scene_ms": 800,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 900,
+          "scene_ms": 900,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 1000,
+          "scene_ms": 1000,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 1100,
+          "scene_ms": 1100,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 1200,
+          "scene_ms": 1200,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 1300,
+          "scene_ms": 1300,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 1400,
+          "scene_ms": 1400,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 1500,
+          "scene_ms": 1500,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": -40,
+            "y": 164,
+            "state": 2,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 1600,
+          "scene_ms": 1600,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": -24,
+            "y": 164,
+            "state": 2,
+            "frame": 1,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 1700,
+          "scene_ms": 1700,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": -7,
+            "y": 164,
+            "state": 2,
+            "frame": 2,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 400,
+            "y": 164,
+            "state": 2,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 1800,
+          "scene_ms": 1800,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 10,
+            "y": 164,
+            "state": 2,
+            "frame": 3,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 384,
+            "y": 164,
+            "state": 2,
+            "frame": 1,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 1900,
+          "scene_ms": 1900,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 27,
+            "y": 164,
+            "state": 2,
+            "frame": 4,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 367,
+            "y": 164,
+            "state": 2,
+            "frame": 2,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 2000,
+          "scene_ms": 2000,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 44,
+            "y": 164,
+            "state": 2,
+            "frame": 5,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 350,
+            "y": 164,
+            "state": 2,
+            "frame": 3,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 2100,
+          "scene_ms": 2100,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 60,
+            "y": 164,
+            "state": 2,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 333,
+            "y": 164,
+            "state": 2,
+            "frame": 4,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 2200,
+          "scene_ms": 2200,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 77,
+            "y": 164,
+            "state": 2,
+            "frame": 1,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 316,
+            "y": 164,
+            "state": 2,
+            "frame": 5,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 2300,
+          "scene_ms": 2300,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 94,
+            "y": 164,
+            "state": 2,
+            "frame": 2,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 300,
+            "y": 164,
+            "state": 2,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 2400,
+          "scene_ms": 2400,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 111,
+            "y": 164,
+            "state": 2,
+            "frame": 3,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 283,
+            "y": 164,
+            "state": 2,
+            "frame": 1,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 2500,
+          "scene_ms": 2500,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 128,
+            "y": 164,
+            "state": 2,
+            "frame": 4,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 266,
+            "y": 164,
+            "state": 2,
+            "frame": 2,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 2600,
+          "scene_ms": 2600,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 249,
+            "y": 164,
+            "state": 2,
+            "frame": 3,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 2700,
+          "scene_ms": 2700,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 232,
+            "y": 164,
+            "state": 2,
+            "frame": 4,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 2800,
+          "scene_ms": 2800,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 1,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 1,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 2900,
+          "scene_ms": 2900,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 1,
+            "frame": 1,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 1,
+            "frame": 1,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 3000,
+          "scene_ms": 3000,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 1,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 1,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 3100,
+          "scene_ms": 3100,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 3,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 3,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 3200,
+          "scene_ms": 3200,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 3300,
+          "scene_ms": 3300,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 3400,
+          "scene_ms": 3400,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 3500,
+          "scene_ms": 3500,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 3600,
+          "scene_ms": 3600,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 3700,
+          "scene_ms": 3700,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 3800,
+          "scene_ms": 3800,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 3900,
+          "scene_ms": 3900,
+          "exit_ms": 0,
+          "phase": "intro",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 4000,
+          "scene_ms": 4000,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 4100,
+          "scene_ms": 4100,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 4200,
+          "scene_ms": 4200,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 4300,
+          "scene_ms": 4300,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 4400,
+          "scene_ms": 4400,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 4500,
+          "scene_ms": 4500,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 4600,
+          "scene_ms": 4600,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 4700,
+          "scene_ms": 4700,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 4800,
+          "scene_ms": 4800,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 4900,
+          "scene_ms": 4900,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 5000,
+          "scene_ms": 5000,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 5100,
+          "scene_ms": 5100,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 5200,
+          "scene_ms": 5200,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 5300,
+          "scene_ms": 5300,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 5400,
+          "scene_ms": 5400,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 5500,
+          "scene_ms": 5500,
+          "exit_ms": 0,
+          "phase": "waiting",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": false,
+          "press_latched": false,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 5600,
+          "scene_ms": 5600,
+          "exit_ms": 0,
+          "phase": "entering",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 145,
+            "y": 164,
+            "state": 2,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 215,
+            "y": 164,
+            "state": 2,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 5700,
+          "scene_ms": 5600,
+          "exit_ms": 100,
+          "phase": "entering",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 148,
+            "y": 159,
+            "state": 2,
+            "frame": 1,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 212,
+            "y": 159,
+            "state": 2,
+            "frame": 1,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 5800,
+          "scene_ms": 5600,
+          "exit_ms": 200,
+          "phase": "entering",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 152,
+            "y": 153,
+            "state": 2,
+            "frame": 2,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 208,
+            "y": 153,
+            "state": 2,
+            "frame": 2,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 5900,
+          "scene_ms": 5600,
+          "exit_ms": 300,
+          "phase": "entering",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 155,
+            "y": 147,
+            "state": 2,
+            "frame": 3,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 205,
+            "y": 147,
+            "state": 2,
+            "frame": 3,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 6000,
+          "scene_ms": 5600,
+          "exit_ms": 400,
+          "phase": "entering",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 159,
+            "y": 141,
+            "state": 2,
+            "frame": 4,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 201,
+            "y": 141,
+            "state": 2,
+            "frame": 4,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 6100,
+          "scene_ms": 5600,
+          "exit_ms": 500,
+          "phase": "entering",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 162,
+            "y": 135,
+            "state": 2,
+            "frame": 5,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 198,
+            "y": 135,
+            "state": 2,
+            "frame": 5,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 6200,
+          "scene_ms": 5600,
+          "exit_ms": 600,
+          "phase": "entering",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": true
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 6300,
+          "scene_ms": 5600,
+          "exit_ms": 700,
+          "phase": "entering",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": true
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 6400,
+          "scene_ms": 5600,
+          "exit_ms": 800,
+          "phase": "entering",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 6500,
+          "scene_ms": 5600,
+          "exit_ms": 900,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 6600,
+          "scene_ms": 5600,
+          "exit_ms": 1000,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 6700,
+          "scene_ms": 5600,
+          "exit_ms": 1100,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 6800,
+          "scene_ms": 5600,
+          "exit_ms": 1200,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 6900,
+          "scene_ms": 5600,
+          "exit_ms": 1300,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 7000,
+          "scene_ms": 5600,
+          "exit_ms": 1400,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 7100,
+          "scene_ms": 5600,
+          "exit_ms": 1500,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 7200,
+          "scene_ms": 5600,
+          "exit_ms": 1600,
+          "phase": "wiping",
+          "active": true,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 166,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 194,
+            "y": 129,
+            "state": 0,
+            "frame": 0,
+            "direction": -1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 7300,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 7400,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 7500,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 7600,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 7700,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 7800,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 7900,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 8000,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 8100,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 8200,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 8300,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 8400,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "elapsed_ms": 8500,
+          "scene_ms": 5600,
+          "exit_ms": 1700,
+          "phase": "done",
+          "active": false,
+          "anniversary": true,
+          "touch_ms": 5600,
+          "touch_accepted": true,
+          "press_latched": true,
+          "orange": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          },
+          "black": {
+            "x": 0,
+            "y": 164,
+            "state": 0,
+            "frame": 0,
+            "direction": 1,
+            "visible": false
+          }
+        }
+      ],
+      "exact_palette_and_pixels_verified": true
+    }
+  },
+  "existing_home_rgb_colors": {
+    "normal": [
+      [
+        24,
+        28,
+        32
+      ],
+      [
+        32,
+        32,
+        32
+      ],
+      [
+        41,
+        40,
+        49
+      ],
+      [
+        49,
+        40,
+        32
+      ],
+      [
+        57,
+        72,
+        57
+      ],
+      [
+        65,
+        44,
+        32
+      ],
+      [
+        74,
+        80,
+        82
+      ],
+      [
+        74,
+        89,
+        106
+      ],
+      [
+        90,
+        68,
+        49
+      ],
+      [
+        98,
+        97,
+        115
+      ],
+      [
+        98,
+        113,
+        74
+      ],
+      [
+        106,
+        72,
+        49
+      ],
+      [
+        106,
+        121,
+        131
+      ],
+      [
+        139,
+        105,
+        74
+      ],
+      [
+        139,
+        145,
+        106
+      ],
+      [
+        139,
+        153,
+        156
+      ],
+      [
+        148,
+        89,
+        74
+      ],
+      [
+        148,
+        133,
+        98
+      ],
+      [
+        156,
+        113,
+        65
+      ],
+      [
+        156,
+        121,
+        106
+      ],
+      [
+        156,
+        145,
+        106
+      ],
+      [
+        172,
+        141,
+        90
+      ],
+      [
+        172,
+        153,
+        98
+      ],
+      [
+        180,
+        141,
+        123
+      ],
+      [
+        180,
+        141,
+        148
+      ],
+      [
+        180,
+        165,
+        98
+      ],
+      [
+        180,
+        165,
+        131
+      ],
+      [
+        189,
+        157,
+        106
+      ],
+      [
+        197,
+        182,
+        139
+      ],
+      [
+        213,
+        190,
+        148
+      ]
+    ],
+    "anniversary": [
+      [
+        24,
+        28,
+        32
+      ],
+      [
+        32,
+        32,
+        32
+      ],
+      [
+        41,
+        40,
+        49
+      ],
+      [
+        49,
+        40,
+        32
+      ],
+      [
+        57,
+        72,
+        57
+      ],
+      [
+        65,
+        44,
+        32
+      ],
+      [
+        74,
+        80,
+        82
+      ],
+      [
+        74,
+        89,
+        106
+      ],
+      [
+        90,
+        68,
+        49
+      ],
+      [
+        98,
+        97,
+        115
+      ],
+      [
+        98,
+        113,
+        74
+      ],
+      [
+        106,
+        72,
+        49
+      ],
+      [
+        106,
+        121,
+        131
+      ],
+      [
+        139,
+        105,
+        74
+      ],
+      [
+        139,
+        145,
+        106
+      ],
+      [
+        139,
+        153,
+        156
+      ],
+      [
+        148,
+        89,
+        74
+      ],
+      [
+        148,
+        133,
+        98
+      ],
+      [
+        156,
+        113,
+        65
+      ],
+      [
+        156,
+        121,
+        106
+      ],
+      [
+        156,
+        145,
+        106
+      ],
+      [
+        172,
+        141,
+        90
+      ],
+      [
+        172,
+        153,
+        98
+      ],
+      [
+        180,
+        141,
+        123
+      ],
+      [
+        180,
+        141,
+        148
+      ],
+      [
+        180,
+        165,
+        98
+      ],
+      [
+        180,
+        165,
+        131
+      ],
+      [
+        189,
+        157,
+        106
+      ],
+      [
+        197,
+        182,
+        139
+      ],
+      [
+        213,
+        190,
+        148
+      ]
+    ]
+  }
+}

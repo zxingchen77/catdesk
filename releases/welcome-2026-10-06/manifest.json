@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-06",
+  "target": "ESP32-S3-Touch-LCD-7",
+  "esp_idf": "5.5.5",
+  "firmware": "catdesk-welcome.bin",
+  "firmware_bytes": 779216,
+  "sha256": "e62ce9d7047585464bcfcdc6afd0c4735c526dcc71aaefe3f5396c720f7189d2",
+  "application_partition_bytes": 1048576,
+  "free_application_bytes": 269360,
+  "flash": {
+    "method": "idf.py app-flash",
+    "offset": "0x10000",
+    "checksum_verified": true,
+    "bootloader_or_partition_flashed": false
+  },
+  "welcome": {
+    "logical_pixels": [
+      400,
+      240
+    ],
+    "physical_pixels": [
+      800,
+      480
+    ],
+    "scale": "2x nearest-neighbor",
+    "fps": 10,
+    "intro_ms": 4000,
+    "run_home_ms": 600,
+    "door_open_ms": 300,
+    "tile_wipe_ms": 800,
+    "tile_size": 16,
+    "automatic_home_entry": false,
+    "intro_touch": "ignored",
+    "accepted_touch": "one press in WAITING",
+    "shared_sprite_scratch_bytes": 3200,
+    "new_framebuffers": 0,
+    "heap_allocation": false
+  },
+  "verification": {
+    "host_checks": "PASS; C11, ASan/UBSan, actual callbacks and presenter plus original regressions",
+    "normal_date_hardware_flow": "PASS; physical touch and UART protocol checks",
+    "user_confirmation": "停住等待，触摸后正常进入主页",
+    "october_7": "PASS; same-source software rendering and date/heart tests; not physically date-injected",
+    "room_life_1_to_2_hour_soak": "pending; inherited candidate acceptance gate",
+    "hardware_observer": {
+      "duration_seconds": 180,
+      "identity_confirmed": true,
+      "real_time_acks": 87,
+      "waiting_observed": 1,
+      "physical_touch_accepted": 1,
+      "home_scene_stopped": 1,
+      "alive_logs": 11,
+      "failure_markers": [],
+      "physical_flow_pass": true
+    }
+  },
+  "source_sha256": {
+    "firmware/components/catdesk_ui/catdesk_ui.c": "cc69d68f3881756829d0b4c688365d8276244ac14823faaa930f737bc263c092",
+    "firmware/components/catdesk_ui/catdesk_welcome.c": "037a1cf41e03db5e31afd07eca9dcad15b139071aa1598cf95f220ed94b8beb1",
+    "firmware/components/catdesk_ui/include/catdesk_welcome.h": "6301de8a1baf59947b319a93bf02aab832d660a89a49bcd7f517e6109c2cce1e",
+    "firmware/components/catdesk_ui/catdesk_font.c": "316f8e0b54735d08e27f50b07376b84e78fa5dcb514e55cd99bb5c8763d29ad8"
+  },
+  "previews": "assets/welcome-2026-10-06"
+}
